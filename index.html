@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Mars Guo — Operations Research projects in optimization, transportation systems, and autonomous coordination."
+    />
+    <title>Mars Guo · OR Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="wordmark" href="#top">MG<span>·</span>OR</a>
+        <div class="nav-links">
+          <a href="#projects">Projects</a>
+          <a href="#research">Research</a>
+          <a href="https://github.com/marsguo2049" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </div>
+      </nav>
+
+      <section class="hero" id="top">
+        <p class="eyebrow">MARS GUO · OPERATIONS RESEARCH</p>
+        <h1>Building better<br /><em>decision systems.</em></h1>
+        <p class="intro">
+          I work at the intersection of optimization, transportation networks, and autonomous coordination — turning complex operational systems into clear, testable decisions.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#projects">Explore projects <span>↓</span></a>
+          <a class="button text" href="https://moltpany.github.io" target="_blank" rel="noreferrer">Visit Moltpany ↗</a>
+        </div>
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="node node-one"></div>
+        <div class="node node-two"></div>
+      </section>
+
+      <section class="section research" id="research">
+        <div class="section-heading">
+          <p class="eyebrow">01 / RESEARCH</p>
+          <h2>Networks, uncertainty,<br />and real operations.</h2>
+        </div>
+        <article class="research-card">
+          <p class="card-index">DOCTORAL RESEARCH</p>
+          <h3>Multimodal freight network design</h3>
+          <p>
+            Designing resilient, lower-cost logistics systems across truck, rail, terminals, and dry ports — with uncertainty, disruption, and real operating constraints in view.
+          </p>
+          <div class="tags"><span>Network Design</span><span>Optimization</span><span>Resilience</span></div>
+        </article>
+      </section>
+
+      <section class="section projects" id="projects">
+        <div class="section-heading compact">
+          <p class="eyebrow">02 / OR PROJECTS</p>
+          <h2>Models you can<br /><em>interact with.</em></h2>
+          <p>Independent experiments spanning multi-agent coordination, scheduling, network design, and visual simulation.</p>
+        </div>
+
+        <div class="project-grid">
+          <a class="project-card featured" href="https://github.com/marsguo2049/robot-soccer-team" target="_blank" rel="noreferrer">
+            <div class="project-visual football"><span>4–2–4</span><i></i><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+            <div class="project-copy"><p>MULTI-AGENT COORDINATION</p><h3>Robot Soccer Team</h3><span>Explore project ↗</span></div>
+          </a>
+          <a class="project-card" href="https://github.com/marsguo2049/drone-swarm" target="_blank" rel="noreferrer">
+            <div class="project-visual drones"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="project-copy"><p>ASSIGNMENT &amp; TRAJECTORY</p><h3>Drone Swarm</h3><span>Explore project ↗</span></div>
+          </a>
+          <a class="project-card" href="https://github.com/marsguo2049/elevator-dispatch" target="_blank" rel="noreferrer">
+            <div class="project-visual elevator"><i></i><i></i><i></i><b></b><b></b><b></b><b></b></div>
+            <div class="project-copy"><p>ONLINE SCHEDULING</p><h3>Elevator Dispatch</h3><span>Explore project ↗</span></div>
+          </a>
+          <a class="project-card" href="https://github.com/marsguo2049/orbital-network-design" target="_blank" rel="noreferrer">
+            <div class="project-visual orbital"><i></i><i></i><i></i><b></b></div>
+            <div class="project-copy"><p>NETWORK DESIGN</p><h3>Orbital Network</h3><span>Explore project ↗</span></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section studio">
+        <div>
+          <p class="eyebrow">03 / CREATIVE LAB</p>
+          <h2>Also making small<br /><em>worlds to explore.</em></h2>
+        </div>
+        <p>
+          Moltpany is my creative space for interactive 3D rooms, small worlds, and visual experiments — where systems thinking meets play.
+        </p>
+        <a class="button primary" href="https://moltpany.github.io" target="_blank" rel="noreferrer">Enter Moltpany ↗</a>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year"></span> Mars Guo</span>
+      <a href="https://github.com/marsguo2049" target="_blank" rel="noreferrer">github.com/marsguo2049 ↗</a>
+    </footer>
+    <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+  </body>
+</html>

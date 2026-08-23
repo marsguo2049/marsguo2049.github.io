@@ -3,165 +3,196 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#091522" />
     <meta
       name="description"
-      content="Mars Guo's work portfolio: operations research, research tools, and City2049 experiments."
+      content="Mars Guo's work portfolio: operations research, research tools, City2049, and research ideas."
     />
     <title>Mars Guo · Research, Tools &amp; City2049</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main>
-      <nav class="nav" aria-label="Primary navigation">
-        <a class="wordmark" href="#top">MG<span>·</span>2049</a>
-        <div class="nav-links">
-          <a href="#focus">Research</a>
-          <a href="#tools">Tools</a>
-          <a href="#city2049">City2049</a>
-          <a href="#projects">Projects</a>
-          <a href="https://github.com/marsguo2049" target="_blank" rel="noreferrer">GitHub ↗</a>
+    <section class="app-shell" id="portfolio" data-active="0" aria-label="Mars Guo work portfolio">
+      <div class="backdrop-stack" aria-hidden="true">
+        <div class="backdrop backdrop-tools is-active" data-backdrop="0">
+          <div class="aurora aurora-a"></div><div class="aurora aurora-b"></div>
+          <svg class="scene-art" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+            <defs><pattern id="toolGrid" width="52" height="52" patternUnits="userSpaceOnUse"><path d="M52 0H0V52" fill="none" stroke="rgba(164,211,226,.11)" stroke-width="1"/></pattern></defs>
+            <rect width="1600" height="900" fill="url(#toolGrid)"/>
+            <g class="tool-panels" fill="none" stroke="rgba(212,238,246,.22)">
+              <rect x="900" y="135" width="470" height="280" rx="22"/><rect x="1010" y="245" width="420" height="250" rx="22"/>
+              <path d="M960 210h235M960 250h180M960 290h280M1070 330h225M1070 370h145"/>
+            </g>
+            <path class="trace trace-a" d="M-80 650C250 510 390 770 720 610S1190 470 1680 615" fill="none" stroke="rgba(255,166,93,.55)" stroke-width="2"/>
+          </svg>
         </div>
-      </nav>
 
-      <section class="hero" id="top">
-        <div class="hero-copy">
-          <p class="eyebrow">WORK GITHUB · OPERATIONS RESEARCH</p>
-          <h1>Researching decisions.<br /><em>Building what comes next.</em></h1>
-          <p class="intro">
-            This is my working map for operations research: academic questions, practical research tools, and City2049 — a shared world for exploring how optimisation, AI and autonomous systems may shape future cities.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#tools">Explore the work <span>↓</span></a>
-            <a class="button text" href="https://github.com/marsguo2049" target="_blank" rel="noreferrer">View repositories ↗</a>
+        <div class="backdrop backdrop-city" data-backdrop="1">
+          <div class="city-sun"></div><div class="city-haze"></div>
+          <svg class="scene-art city-art" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+            <g class="sky-routes" fill="none" stroke="rgba(144,214,235,.30)" stroke-width="2"><path d="M-50 300C330 150 560 410 890 245S1320 110 1680 250"/><path d="M-80 460C360 330 560 560 950 395s430-170 760-70"/></g>
+            <g class="sky-dots" fill="#f1b36c"><circle cx="260" cy="218" r="6"/><circle cx="702" cy="320" r="5"/><circle cx="1160" cy="210" r="7"/></g>
+            <path class="skyline far" d="M0 690V560h95v-95h90v140h80V430h120v95h70V350h105v270h75V475h130v150h90V390h95v180h70V290h125v330h70V445h120v130h70V510h105v180Z"/>
+            <path class="skyline near" d="M0 760V650h150V520h110v175h80V565h160v125h105V470h130v220h90V590h120V430h140v280h90V560h140v130h105V510h200v250Z"/>
+            <path class="road-grid" d="M570 900 790 570M1030 900 875 570M0 800h1600M210 720h1180M410 650h790" fill="none" stroke="rgba(230,240,244,.18)"/>
+          </svg>
+        </div>
+
+        <div class="backdrop backdrop-projects" data-backdrop="2">
+          <div class="map-glow"></div>
+          <svg class="scene-art network-art" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+            <g fill="none" stroke="rgba(163,222,205,.24)" stroke-width="2"><path d="M-60 760 310 530 560 650 820 330 1090 510 1390 260 1680 390"/><path d="M80 210 380 400 650 260 950 470 1260 380 1600 650"/><path d="M310 530 380 400M560 650 950 470M820 330 1260 380M1090 510 1600 650"/></g>
+            <g class="network-nodes"><circle cx="310" cy="530" r="12"/><circle cx="380" cy="400" r="8"/><circle cx="560" cy="650" r="9"/><circle cx="650" cy="260" r="10"/><circle cx="820" cy="330" r="13"/><circle cx="950" cy="470" r="8"/><circle cx="1090" cy="510" r="11"/><circle cx="1260" cy="380" r="9"/><circle cx="1390" cy="260" r="12"/></g>
+            <g class="route-labels"><text x="286" y="495">ASSIGN</text><text x="790" y="295">SCHEDULE</text><text x="1235" y="345">ROUTE</text></g>
+          </svg>
+        </div>
+
+        <div class="backdrop backdrop-research" data-backdrop="3">
+          <div class="paper-light"></div><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+          <svg class="scene-art research-art" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+            <g fill="none" stroke="rgba(44,78,104,.17)"><circle cx="1190" cy="420" r="310"/><circle cx="1190" cy="420" r="215"/><circle cx="1190" cy="420" r="105"/><path d="M780 420h820M1190 0v900"/></g>
+            <g fill="#c4603f"><circle cx="1190" cy="315" r="9"/><circle cx="975" cy="420" r="7"/></g><g fill="#315d78"><circle cx="1412" cy="205" r="8"/><circle cx="1350" cy="610" r="10"/></g>
+            <path d="M170 680C420 570 500 710 730 610" fill="none" stroke="rgba(49,93,120,.28)" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="grain" aria-hidden="true"></div>
+      <div class="vignette" aria-hidden="true"></div>
+
+      <div class="content-layer">
+        <header class="topbar">
+          <a class="logo" href="#" data-scene-target="0" aria-label="Mars Guo portfolio home">Mars Guo <i>·</i> 2049</a>
+
+          <nav class="desktop-nav liquid-glass" aria-label="Portfolio windows">
+            <button class="nav-scene is-active" type="button" data-scene-target="0">Research Tools</button>
+            <button class="nav-scene" type="button" data-scene-target="1">City2049</button>
+            <button class="nav-scene" type="button" data-scene-target="2">OR Projects</button>
+            <button class="nav-scene" type="button" data-scene-target="3">Research &amp; Ideas</button>
+            <a class="nav-primary" href="https://github.com/marsguo2049" target="_blank" rel="noreferrer">GitHub ↗</a>
+          </nav>
+
+          <button class="menu-toggle liquid-glass" type="button" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span>
+          </button>
+        </header>
+
+        <div class="mobile-menu" aria-hidden="true">
+          <div class="mobile-menu-inner">
+            <button type="button" data-scene-target="0" style="--delay:100ms">Research Tools</button>
+            <button type="button" data-scene-target="1" style="--delay:150ms">City2049</button>
+            <button type="button" data-scene-target="2" style="--delay:200ms">OR Projects</button>
+            <button type="button" data-scene-target="3" style="--delay:250ms">Research &amp; Ideas</button>
+            <a href="https://github.com/marsguo2049" target="_blank" rel="noreferrer" style="--delay:300ms">Open GitHub ↗</a>
           </div>
         </div>
-        <div class="hero-map" aria-hidden="true">
-          <span class="map-label label-a">RESEARCH</span>
-          <span class="map-label label-b">TOOLS</span>
-          <span class="map-label label-c">CITY2049</span>
-          <i class="ring ring-a"></i><i class="ring ring-b"></i>
-          <b class="point point-a"></b><b class="point point-b"></b><b class="point point-c"></b>
-        </div>
-      </section>
 
-      <section class="identity-strip" aria-label="Portfolio structure">
-        <div><span>01</span><strong>Research</strong><small>Questions, models and evidence</small></div>
-        <div><span>02</span><strong>Research tools</strong><small>Workflows that make research clearer</small></div>
-        <div><span>03</span><strong>City2049</strong><small>Future systems made explorable</small></div>
-      </section>
+        <main class="slide-stage" aria-live="polite">
+          <article class="slide is-active" data-slide="0" aria-hidden="false">
+            <div class="slide-inner">
+              <div class="hero-copy">
+                <div class="scene-badge liquid-glass"><span class="pulse-dot"></span>Work account · Research workflow</div>
+                <p class="kicker">01 / RESEARCH TOOLS</p>
+                <h1>Tools for research<br /><em>you can inspect.</em></h1>
+                <p class="lead">A growing toolkit for moving from literature to implementation and then to human-readable verification — without hiding uncertainty behind polished output.</p>
+                <div class="actions"><a class="primary-action" href="https://github.com/marsguo2049/Py2Cpp4OR" target="_blank" rel="noreferrer">Open Py2Cpp4OR ↗</a><button class="text-action" type="button" data-scene-target="3">See the research direction →</button></div>
+              </div>
 
-      <section class="section focus" id="focus">
-        <div class="section-heading">
-          <p class="eyebrow">01 / RESEARCH FOCUS</p>
-          <h2>Networks, uncertainty<br />and real operations.</h2>
-        </div>
-        <article class="focus-card">
-          <div class="status published"><i></i> Doctoral research</div>
-          <h3>Multimodal freight network optimisation</h3>
-          <p>
-            Designing resilient and lower-cost freight systems across road, rail, terminals and dry ports, with routing, facility decisions, disruptions and operational constraints considered together.
-          </p>
-          <div class="tags"><span>Network design</span><span>Routing</span><span>Location</span><span>Resilience</span></div>
-        </article>
-      </section>
-
-      <section class="section tools" id="tools">
-        <div class="section-heading split-heading">
-          <div>
-            <p class="eyebrow">02 / RESEARCH TOOLS</p>
-            <h2>From a question<br />to inspectable evidence.</h2>
-          </div>
-          <p>
-            Not every useful idea begins as a finished repository. This roadmap shows what is published, what is being developed locally, and what is still a concept.
-          </p>
-        </div>
-
-        <div class="status-key" aria-label="Project status key">
-          <span><i class="dot green"></i>Published</span>
-          <span><i class="dot amber"></i>In development</span>
-          <span><i class="dot outline"></i>Concept</span>
-        </div>
-
-        <div class="tool-flow">
-          <article class="tool-card">
-            <div class="tool-topline"><span>01 · DISCOVER</span><span class="status development"><i></i>In development</span></div>
-            <h3>Literature Review Workspace</h3>
-            <p>A local research workflow for collecting, organising, comparing and synthesising literature. A public repository is planned after the current version is ready to share.</p>
-            <span class="quiet-link">Repository forthcoming</span>
+              <section class="content-window liquid-glass" aria-label="Research tools roadmap">
+                <div class="window-bar"><div><i></i><i></i><i></i></div><span>research-workflow / roadmap</span><b>01</b></div>
+                <div class="window-body workflow-list">
+                  <article><span class="step">DISCOVER</span><div><h2>Literature Review Workspace</h2><p>Collect, compare and synthesise literature.</p></div><small class="status development">In development</small></article>
+                  <a href="https://github.com/marsguo2049/Py2Cpp4OR" target="_blank" rel="noreferrer"><span class="step">IMPLEMENT</span><div><h2>Py2Cpp4OR</h2><p>Python-to-C++ OR migration with explicit verification.</p></div><small class="status published">Published · docs</small></a>
+                  <article><span class="step">INSPECT</span><div><h2>Visual Verification for OR</h2><p>See routes, schedules, constraints and traces.</p></div><small class="status concept">Concept</small></article>
+                </div>
+              </section>
+            </div>
           </article>
 
-          <a class="tool-card active" href="https://github.com/marsguo2049/Py2Cpp4OR" target="_blank" rel="noreferrer">
-            <div class="tool-topline"><span>02 · IMPLEMENT</span><span class="status published"><i></i>Published</span></div>
-            <h3>Py2Cpp4OR</h3>
-            <p>A documentation-first framework for migrating mathematical optimisation models and metaheuristics from Python to C++, with explicit cross-language verification.</p>
-            <span class="quiet-link">Documentation foundation · Open repository ↗</span>
-          </a>
+          <article class="slide" data-slide="1" aria-hidden="true">
+            <div class="slide-inner">
+              <div class="hero-copy">
+                <div class="scene-badge liquid-glass"><span class="pulse-dot"></span>Future lab · Original near-future world</div>
+                <p class="kicker">02 / CITY2049</p>
+                <h1>A future city<br /><em>grounded in decisions.</em></h1>
+                <p class="lead">City2049 connects concrete operations-research experiments through one evolving city. It is a navigation world for asking better questions — not a prediction or a claim that every system is optimised.</p>
+                <div class="actions"><a class="primary-action" href="https://marsguo2049.github.io/city2049/" target="_blank" rel="noreferrer">Enter City2049 ↗</a><a class="text-action" href="https://marsguo2049.github.io/city2049-reference/" target="_blank" rel="noreferrer">Explore references →</a></div>
+              </div>
 
-          <article class="tool-card concept-card">
-            <div class="tool-topline"><span>03 · INSPECT</span><span class="status concept"><i></i>Concept</span></div>
-            <h3>Visual Verification for OR</h3>
-            <p>A visual layer for inspecting routes, schedules, assignments, objective components, constraint violations and algorithm traces — especially when research code is produced with AI assistance.</p>
-            <span class="quiet-link">Working concept · Repository not created</span>
+              <section class="content-window liquid-glass" aria-label="City2049 overview">
+                <div class="window-bar"><div><i></i><i></i><i></i></div><span>city2049 / world-map</span><b>02</b></div>
+                <div class="window-body city-window">
+                  <div class="city-question"><small>CORE QUESTION</small><h2>What happens when optimisation becomes the operating system of a city?</h2></div>
+                  <div class="city-path"><span>World</span><i></i><span>System</span><i></i><span>Problem</span><i></i><span>Model</span><i></i><span>Experiment</span></div>
+                  <div class="window-links"><a href="https://marsguo2049.github.io/city2049/" target="_blank" rel="noreferrer"><span>Interactive city</span><small class="status published">Published</small></a><a href="https://marsguo2049.github.io/city2049-reference/" target="_blank" rel="noreferrer"><span>Cultural reference library</span><small class="status published">Published</small></a></div>
+                </div>
+              </section>
+            </div>
           </article>
+
+          <article class="slide" data-slide="2" aria-hidden="true">
+            <div class="slide-inner">
+              <div class="hero-copy">
+                <div class="scene-badge liquid-glass"><span class="pulse-dot"></span>Interactive experiments · Honest methods</div>
+                <p class="kicker">03 / OR PROJECTS</p>
+                <h1>Small systems.<br /><em>Visible decisions.</em></h1>
+                <p class="lead">Interactive experiments make assignments, scheduling, routing and coordination easier to understand. Each project separates optimisation, heuristics and simulation instead of treating them as the same thing.</p>
+                <div class="actions"><a class="primary-action" href="https://marsguo2049.github.io/robot-soccer-team/" target="_blank" rel="noreferrer">Open a live experiment ↗</a><button class="text-action" type="button" data-scene-target="1">See their City2049 context →</button></div>
+              </div>
+
+              <section class="content-window liquid-glass" aria-label="Interactive operations research projects">
+                <div class="window-bar"><div><i></i><i></i><i></i></div><span>or-lab / live-experiments</span><b>03</b></div>
+                <div class="window-body project-list">
+                  <a href="https://marsguo2049.github.io/robot-soccer-team/" target="_blank" rel="noreferrer"><span>01</span><div><h2>Robot Soccer</h2><p>Assignment · route search · simulation</p></div><b>↗</b></a>
+                  <a href="https://marsguo2049.github.io/kitchen/" target="_blank" rel="noreferrer"><span>02</span><div><h2>Robo Kitchen</h2><p>Online scheduling · coordination</p></div><b>↗</b></a>
+                  <a href="https://marsguo2049.github.io/drone-swarm/" target="_blank" rel="noreferrer"><span>03</span><div><h2>Drone Swarm</h2><p>Formation assignment · local search</p></div><b>↗</b></a>
+                  <a href="https://marsguo2049.github.io/elevator/" target="_blank" rel="noreferrer"><span>04</span><div><h2>Elevator</h2><p>Dispatch heuristics · simulation</p></div><b>↗</b></a>
+                  <a href="https://marsguo2049.github.io/orbital-network-design/" target="_blank" rel="noreferrer"><span>05</span><div><h2>Orbital Computing</h2><p>Task allocation · network routing</p></div><b>↗</b></a>
+                </div>
+              </section>
+            </div>
+          </article>
+
+          <article class="slide slide-light" data-slide="3" aria-hidden="true">
+            <div class="slide-inner">
+              <div class="hero-copy">
+                <div class="scene-badge liquid-glass"><span class="pulse-dot"></span>Research focus · Ideas in view</div>
+                <p class="kicker">04 / RESEARCH &amp; IDEAS</p>
+                <h1>Research questions,<br /><em>then systems around them.</em></h1>
+                <p class="lead">My core work studies multimodal freight networks under real operational constraints. This portfolio also keeps promising early ideas visible, with clear status labels rather than pretending they are finished projects.</p>
+                <div class="actions"><a class="primary-action" href="https://github.com/marsguo2049" target="_blank" rel="noreferrer">View my GitHub ↗</a><a class="text-action" href="https://moltpany.github.io" target="_blank" rel="noreferrer">Everyday &amp; creative work at Moltpany →</a></div>
+              </div>
+
+              <section class="content-window liquid-glass" aria-label="Research and ideas">
+                <div class="window-bar"><div><i></i><i></i><i></i></div><span>research-map / now-next</span><b>04</b></div>
+                <div class="window-body idea-list">
+                  <article class="idea-feature"><small>DOCTORAL RESEARCH</small><h2>Multimodal freight network optimisation</h2><p>Network design, routing, location, uncertainty and resilience across road, rail, terminals and dry ports.</p></article>
+                  <div class="idea-row"><div><h3>Computing-infrastructure siting</h3><p>Grid-aware capacity and location decisions.</p></div><small class="status concept">Research idea</small></div>
+                  <div class="idea-row"><div><h3>Heterogeneous-agent simulation</h3><p>Connect OR decisions to physical simulation.</p></div><small class="status development">Exploration</small></div>
+                </div>
+              </section>
+            </div>
+          </article>
+        </main>
+
+        <div class="bottom-area">
+          <div class="portfolio-note"><span><b>marsguo2049</b> · research &amp; work</span><i></i><a href="https://moltpany.github.io" target="_blank" rel="noreferrer"><b>Moltpany</b> · everyday &amp; creative ↗</a></div>
+          <nav class="scene-switcher liquid-glass" aria-label="Switch portfolio window">
+            <button class="is-active" type="button" data-scene-target="0" aria-label="Show Research Tools"><span>01</span><b>Tools</b></button>
+            <button type="button" data-scene-target="1" aria-label="Show City2049"><span>02</span><b>City2049</b></button>
+            <button type="button" data-scene-target="2" aria-label="Show OR Projects"><span>03</span><b>Projects</b></button>
+            <button type="button" data-scene-target="3" aria-label="Show Research and Ideas"><span>04</span><b>Ideas</b></button>
+          </nav>
+          <div class="status-legend"><span><i class="published-dot"></i>Published</span><span><i class="development-dot"></i>In development</span><span><i class="concept-dot"></i>Concept</span></div>
         </div>
-
-        <p class="roadmap-note"><strong>Why show work this early?</strong> A research portfolio should communicate direction as well as output. Status labels keep early ideas visible without presenting them as completed software.</p>
-      </section>
-
-      <section class="section city" id="city2049">
-        <a class="city-portal" href="https://marsguo2049.github.io/city2049/" target="_blank" rel="noreferrer">
-          <div class="city-copy">
-            <p class="eyebrow">03 / CITY2049 · FUTURE LAB</p>
-            <h2>A future city grounded<br />in decisions.</h2>
-            <p>
-              City2049 connects small operations-research experiments through one evolving near-future city. It is a world-building and exploration layer — not a prediction or a claim that every system is already optimised.
-            </p>
-            <span class="portal-link">Enter City2049 ↗</span>
-          </div>
-          <div class="city-diagram" aria-hidden="true">
-            <span>WORLD VIEW</span><span>OR VIEW</span>
-            <i></i><i></i><i></i><i></i><i></i>
-          </div>
-        </a>
-        <a class="reference-link" href="https://marsguo2049.github.io/city2049-reference/" target="_blank" rel="noreferrer">
-          <div><span class="status published"><i></i>Published</span><h3>City2049 Reference</h3></div>
-          <p>A cultural reference library that turns books, films, series and games into future questions that can later be modelled and tested.</p>
-          <strong>Explore references ↗</strong>
-        </a>
-      </section>
-
-      <section class="section projects" id="projects">
-        <div class="section-heading split-heading">
-          <div><p class="eyebrow">04 / INTERACTIVE OR PROJECTS</p><h2>Small systems.<br /><em>Visible decisions.</em></h2></div>
-          <p>Interactive experiments that make assignments, scheduling, coordination and network decisions easier to understand.</p>
-        </div>
-
-        <div class="project-grid">
-          <a class="project-card" href="https://marsguo2049.github.io/robot-soccer-team/" target="_blank" rel="noreferrer"><span class="project-number">01</span><div><p>Assignment · route search · simulation</p><h3>Robot Soccer Team</h3></div><b>Open ↗</b></a>
-          <a class="project-card" href="https://marsguo2049.github.io/kitchen/" target="_blank" rel="noreferrer"><span class="project-number">02</span><div><p>Online scheduling · coordination</p><h3>Robo Kitchen</h3></div><b>Open ↗</b></a>
-          <a class="project-card" href="https://marsguo2049.github.io/drone-swarm/" target="_blank" rel="noreferrer"><span class="project-number">03</span><div><p>Formation assignment · local search</p><h3>Drone Swarm</h3></div><b>Open ↗</b></a>
-          <a class="project-card" href="https://marsguo2049.github.io/elevator/" target="_blank" rel="noreferrer"><span class="project-number">04</span><div><p>Dispatch heuristics · simulation</p><h3>Elevator</h3></div><b>Open ↗</b></a>
-          <a class="project-card" href="https://marsguo2049.github.io/orbital-network-design/" target="_blank" rel="noreferrer"><span class="project-number">05</span><div><p>Task allocation · network routing</p><h3>Orbital Computing</h3></div><b>Open ↗</b></a>
-        </div>
-      </section>
-
-      <aside class="account-note">
-        <div><p class="eyebrow">TWO ACCOUNTS, TWO ROLES</p><h2>This account is for work.</h2></div>
-        <p><strong>marsguo2049</strong> holds my research, research tools and City2049 systems. Smaller projects inspired by everyday life, playful interactions and creative experiments live separately at <a href="https://moltpany.github.io" target="_blank" rel="noreferrer">Moltpany ↗</a>.</p>
-      </aside>
-    </main>
-
-    <footer>
-      <span>© <span id="year"></span> Mars Guo</span>
-      <span>Operations research · Research tools · City2049</span>
-      <a href="https://github.com/marsguo2049" target="_blank" rel="noreferrer">github.com/marsguo2049 ↗</a>
-    </footer>
-    <script>document.getElementById('year').textContent = new Date().getFullYear()</script>
+      </div>
+    </section>
+    <script src="script.js"></script>
   </body>
 </html>

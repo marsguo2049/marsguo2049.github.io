@@ -4,17 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#091522" />
-    <meta
-      name="description"
-      content="Mars Guo's work portfolio: operations research, research tools, City2049, and research ideas."
-    />
-    <title>Mars Guo · Research, Tools &amp; City2049</title>
+    <meta name="description" content="Mars Guo's work portfolio: research tools, local AI, operations research, and City2049." />
+    <title>Mars Guo · Research Tools, Local AI &amp; City2049</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -23,19 +17,25 @@
         <div class="backdrop backdrop-tools is-active" data-backdrop="0">
           <div class="aurora aurora-a"></div><div class="aurora aurora-b"></div>
           <svg class="scene-art" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
-            <defs><pattern id="toolGrid" width="52" height="52" patternUnits="userSpaceOnUse"><path d="M52 0H0V52" fill="none" stroke="rgba(164,211,226,.11)" stroke-width="1"/></pattern></defs>
-            <rect width="1600" height="900" fill="url(#toolGrid)"/>
-            <g class="tool-panels" fill="none" stroke="rgba(212,238,246,.22)">
-              <rect x="900" y="135" width="470" height="280" rx="22"/><rect x="1010" y="245" width="420" height="250" rx="22"/>
-              <path d="M960 210h235M960 250h180M960 290h280M1070 330h225M1070 370h145"/>
-            </g>
-            <path class="trace trace-a" d="M-80 650C250 510 390 770 720 610S1190 470 1680 615" fill="none" stroke="rgba(255,166,93,.55)" stroke-width="2"/>
+            <defs><pattern id="toolGrid" width="52" height="52" patternUnits="userSpaceOnUse"><path d="M52 0H0V52" fill="none" stroke="rgba(164,211,226,.11)" /></pattern></defs>
+            <rect width="1600" height="900" fill="url(#toolGrid)" />
+            <g class="tool-panels" fill="none" stroke="rgba(212,238,246,.22)"><rect x="900" y="135" width="470" height="280" rx="22"/><rect x="1010" y="245" width="420" height="250" rx="22"/><path d="M960 210h235M960 250h180M960 290h280M1070 330h225M1070 370h145"/></g>
+            <path class="trace" d="M-80 650C250 510 390 770 720 610S1190 470 1680 615" fill="none" stroke="rgba(255,166,93,.55)" stroke-width="2"/>
           </svg>
         </div>
 
-        <div class="backdrop backdrop-city" data-backdrop="1">
+        <div class="backdrop backdrop-local" data-backdrop="1">
+          <div class="model-glow"></div>
+          <svg class="scene-art local-art" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+            <g fill="none" stroke="rgba(177,181,255,.22)" stroke-width="2"><path d="M100 680 350 460 590 600 850 300 1110 470 1400 230"/><path d="M180 210 430 390 720 230 980 460 1290 350 1580 610"/><path d="M350 460 430 390M590 600 980 460M850 300 1290 350M1110 470 1580 610"/></g>
+            <g class="ai-nodes"><circle cx="350" cy="460" r="13"/><circle cx="430" cy="390" r="8"/><circle cx="590" cy="600" r="9"/><circle cx="720" cy="230" r="10"/><circle cx="850" cy="300" r="16"/><circle cx="980" cy="460" r="9"/><circle cx="1110" cy="470" r="12"/><circle cx="1290" cy="350" r="10"/><circle cx="1400" cy="230" r="13"/></g>
+            <g class="pipeline-labels"><text x="310" y="425">MODEL</text><text x="805" y="258">LOCAL</text><text x="1245" y="315">COMFYUI</text></g>
+          </svg>
+        </div>
+
+        <div class="backdrop backdrop-city" data-backdrop="2">
           <div class="city-sun"></div><div class="city-haze"></div>
-          <svg class="scene-art city-art" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+          <svg class="scene-art" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
             <g class="sky-routes" fill="none" stroke="rgba(144,214,235,.30)" stroke-width="2"><path d="M-50 300C330 150 560 410 890 245S1320 110 1680 250"/><path d="M-80 460C360 330 560 560 950 395s430-170 760-70"/></g>
             <g class="sky-dots" fill="#f1b36c"><circle cx="260" cy="218" r="6"/><circle cx="702" cy="320" r="5"/><circle cx="1160" cy="210" r="7"/></g>
             <path class="skyline far" d="M0 690V560h95v-95h90v140h80V430h120v95h70V350h105v270h75V475h130v150h90V390h95v180h70V290h125v330h70V445h120v130h70V510h105v180Z"/>
@@ -43,53 +43,31 @@
             <path class="road-grid" d="M570 900 790 570M1030 900 875 570M0 800h1600M210 720h1180M410 650h790" fill="none" stroke="rgba(230,240,244,.18)"/>
           </svg>
         </div>
-
-        <div class="backdrop backdrop-projects" data-backdrop="2">
-          <div class="map-glow"></div>
-          <svg class="scene-art network-art" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
-            <g fill="none" stroke="rgba(163,222,205,.24)" stroke-width="2"><path d="M-60 760 310 530 560 650 820 330 1090 510 1390 260 1680 390"/><path d="M80 210 380 400 650 260 950 470 1260 380 1600 650"/><path d="M310 530 380 400M560 650 950 470M820 330 1260 380M1090 510 1600 650"/></g>
-            <g class="network-nodes"><circle cx="310" cy="530" r="12"/><circle cx="380" cy="400" r="8"/><circle cx="560" cy="650" r="9"/><circle cx="650" cy="260" r="10"/><circle cx="820" cy="330" r="13"/><circle cx="950" cy="470" r="8"/><circle cx="1090" cy="510" r="11"/><circle cx="1260" cy="380" r="9"/><circle cx="1390" cy="260" r="12"/></g>
-            <g class="route-labels"><text x="286" y="495">ASSIGN</text><text x="790" y="295">SCHEDULE</text><text x="1235" y="345">ROUTE</text></g>
-          </svg>
-        </div>
-
-        <div class="backdrop backdrop-research" data-backdrop="3">
-          <div class="paper-light"></div><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
-          <svg class="scene-art research-art" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
-            <g fill="none" stroke="rgba(44,78,104,.17)"><circle cx="1190" cy="420" r="310"/><circle cx="1190" cy="420" r="215"/><circle cx="1190" cy="420" r="105"/><path d="M780 420h820M1190 0v900"/></g>
-            <g fill="#c4603f"><circle cx="1190" cy="315" r="9"/><circle cx="975" cy="420" r="7"/></g><g fill="#315d78"><circle cx="1412" cy="205" r="8"/><circle cx="1350" cy="610" r="10"/></g>
-            <path d="M170 680C420 570 500 710 730 610" fill="none" stroke="rgba(49,93,120,.28)" stroke-width="2"/>
-          </svg>
-        </div>
       </div>
 
-      <div class="grain" aria-hidden="true"></div>
-      <div class="vignette" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div><div class="vignette" aria-hidden="true"></div>
 
       <div class="content-layer">
         <header class="topbar">
           <a class="logo" href="#" data-scene-target="0" aria-label="Mars Guo portfolio home">Mars Guo <i>·</i> 2049</a>
-
-          <nav class="desktop-nav liquid-glass" aria-label="Portfolio windows">
-            <button class="nav-scene is-active" type="button" data-scene-target="0">Research Tools</button>
-            <button class="nav-scene" type="button" data-scene-target="1">City2049</button>
-            <button class="nav-scene" type="button" data-scene-target="2">OR Projects</button>
-            <button class="nav-scene" type="button" data-scene-target="3">Research &amp; Ideas</button>
+          <nav class="desktop-nav liquid-glass" aria-label="Portfolio navigation">
+            <button class="catalog-trigger" type="button"><span data-i18n data-en="All Projects" data-zh="全部项目">All Projects</span><i>19</i></button>
+            <button class="lang-toggle" type="button" aria-label="Switch language">中文</button>
             <a class="nav-primary" href="https://github.com/marsguo2049" target="_blank" rel="noreferrer">GitHub ↗</a>
           </nav>
-
-          <button class="menu-toggle liquid-glass" type="button" aria-label="Open menu" aria-expanded="false">
-            <span></span><span></span>
-          </button>
+          <div class="mobile-actions">
+            <button class="lang-toggle mobile-lang liquid-glass" type="button" aria-label="Switch language">中文</button>
+            <button class="menu-toggle liquid-glass" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+          </div>
         </header>
 
         <div class="mobile-menu" aria-hidden="true">
           <div class="mobile-menu-inner">
-            <button type="button" data-scene-target="0" style="--delay:100ms">Research Tools</button>
-            <button type="button" data-scene-target="1" style="--delay:150ms">City2049</button>
-            <button type="button" data-scene-target="2" style="--delay:200ms">OR Projects</button>
-            <button type="button" data-scene-target="3" style="--delay:250ms">Research &amp; Ideas</button>
-            <a href="https://github.com/marsguo2049" target="_blank" rel="noreferrer" style="--delay:300ms">Open GitHub ↗</a>
+            <button type="button" data-scene-target="0" style="--delay:100ms" data-i18n data-en="Research Tools" data-zh="科研工具">Research Tools</button>
+            <button type="button" data-scene-target="1" style="--delay:150ms" data-i18n data-en="Local AI Lab" data-zh="本地 AI 实验室">Local AI Lab</button>
+            <button type="button" data-scene-target="2" style="--delay:200ms">City2049</button>
+            <button class="catalog-trigger" type="button" style="--delay:250ms" data-i18n data-en="All Projects" data-zh="全部项目">All Projects</button>
+            <a href="https://github.com/marsguo2049" target="_blank" rel="noreferrer" style="--delay:300ms" data-i18n data-en="Open GitHub ↗" data-zh="打开 GitHub ↗">Open GitHub ↗</a>
           </div>
         </div>
 
@@ -97,19 +75,21 @@
           <article class="slide is-active" data-slide="0" aria-hidden="false">
             <div class="slide-inner">
               <div class="hero-copy">
-                <div class="scene-badge liquid-glass"><span class="pulse-dot"></span>Work account · Research workflow</div>
-                <p class="kicker">01 / RESEARCH TOOLS</p>
-                <h1>Tools for research<br /><em>you can inspect.</em></h1>
-                <p class="lead">A growing toolkit for moving from literature to implementation and then to human-readable verification — without hiding uncertainty behind polished output.</p>
-                <div class="actions"><a class="primary-action" href="https://github.com/marsguo2049/Py2Cpp4OR" target="_blank" rel="noreferrer">Open Py2Cpp4OR ↗</a><button class="text-action" type="button" data-scene-target="3">See the research direction →</button></div>
+                <div class="scene-badge liquid-glass"><span class="pulse-dot"></span><span data-i18n data-en="Academic workflow · Tools in progress" data-zh="学术工作流 · 持续开发中">Academic workflow · Tools in progress</span></div>
+                <p class="kicker" data-i18n data-en="01 / RESEARCH TOOLS" data-zh="01 / 科研工具">01 / RESEARCH TOOLS</p>
+                <h1><span data-i18n data-en="Research tools built around" data-zh="围绕真实研究流程">Research tools built around</span><br/><em data-i18n data-en="the real academic workflow." data-zh="构建科研工具。">the real academic workflow.</em></h1>
+                <p class="lead" data-i18n data-en="From finding literature and translating papers to OR writing, implementation migration and visual verification — each tool addresses a concrete point where research becomes slow, opaque or difficult to check." data-zh="从检索文献、翻译论文，到运筹学写作、程序迁移和可视化核验——每个工具都对应研究流程中耗时、不透明或难以检查的具体环节。">From finding literature and translating papers to OR writing, implementation migration and visual verification — each tool addresses a concrete point where research becomes slow, opaque or difficult to check.</p>
+                <div class="actions"><a class="primary-action" href="https://github.com/marsguo2049/Py2Cpp4OR" target="_blank" rel="noreferrer" data-i18n data-en="Open Py2Cpp4OR ↗" data-zh="打开 Py2Cpp4OR ↗">Open Py2Cpp4OR ↗</a><button class="text-action catalog-trigger" type="button" data-i18n data-en="View the complete tool map →" data-zh="查看完整工具地图 →">View the complete tool map →</button></div>
               </div>
 
-              <section class="content-window liquid-glass" aria-label="Research tools roadmap">
-                <div class="window-bar"><div><i></i><i></i><i></i></div><span>research-workflow / roadmap</span><b>01</b></div>
-                <div class="window-body workflow-list">
-                  <article><span class="step">DISCOVER</span><div><h2>Literature Review Workspace</h2><p>Collect, compare and synthesise literature.</p></div><small class="status development">In development</small></article>
-                  <a href="https://github.com/marsguo2049/Py2Cpp4OR" target="_blank" rel="noreferrer"><span class="step">IMPLEMENT</span><div><h2>Py2Cpp4OR</h2><p>Python-to-C++ OR migration with explicit verification.</p></div><small class="status published">Published · docs</small></a>
-                  <article><span class="step">INSPECT</span><div><h2>Visual Verification for OR</h2><p>See routes, schedules, constraints and traces.</p></div><small class="status concept">Concept</small></article>
+              <section class="content-window liquid-glass" aria-label="Research tool workflow">
+                <div class="window-bar"><div><i></i><i></i><i></i></div><span>research-workflow / pipeline</span><b>01</b></div>
+                <div class="window-body workflow-list compact-five">
+                  <article><span class="step" data-i18n data-en="DISCOVER" data-zh="发现">DISCOVER</span><div><h2 data-i18n data-en="Literature Review" data-zh="文献综述">Literature Review</h2><p data-i18n data-en="A topic in; journal-API evidence and synthesis out." data-zh="输入研究主题，通过期刊 API 检索证据并形成综述。">A topic in; journal-API evidence and synthesis out.</p></div><small class="status development" data-i18n data-en="In development" data-zh="开发中">In development</small></article>
+                  <article><span class="step" data-i18n data-en="TRANSLATE" data-zh="翻译">TRANSLATE</span><div><h2 data-i18n data-en="Academic Translation" data-zh="学术翻译">Academic Translation</h2><p data-i18n data-en="English papers to Chinese; patent drafting is a planned extension." data-zh="英文论文译为中文；计划扩展至专利翻译与体例撰写。">English papers to Chinese; patent drafting is a planned extension.</p></div><small class="status development" data-i18n data-en="In development" data-zh="开发中">In development</small></article>
+                  <article><span class="step" data-i18n data-en="WRITE" data-zh="写作">WRITE</span><div><h2 data-i18n data-en="OR Writing" data-zh="运筹学写作">OR Writing</h2><p data-i18n data-en="Structure and language support for OR research writing." data-zh="面向运筹学研究的结构、表达与写作支持。">Structure and language support for OR research writing.</p></div><small class="status development" data-i18n data-en="In development" data-zh="开发中">In development</small></article>
+                  <a href="https://github.com/marsguo2049/Py2Cpp4OR" target="_blank" rel="noreferrer"><span class="step" data-i18n data-en="IMPLEMENT" data-zh="实现">IMPLEMENT</span><div><h2>Py2Cpp4OR</h2><p data-i18n data-en="Documentation-first Python-to-C++ OR migration." data-zh="文档优先的 Python 至 C++ 运筹优化迁移框架。">Documentation-first Python-to-C++ OR migration.</p></div><small class="status published" data-i18n data-en="Published · docs" data-zh="已发布 · 文档">Published · docs</small></a>
+                  <article><span class="step" data-i18n data-en="VERIFY" data-zh="核验">VERIFY</span><div><h2 data-i18n data-en="Visual Verification" data-zh="可视化核验">Visual Verification</h2><p data-i18n data-en="Inspect routes, schedules, constraints and traces." data-zh="检查路径、调度、约束与算法轨迹。">Inspect routes, schedules, constraints and traces.</p></div><small class="status development" data-i18n data-en="In development" data-zh="开发中">In development</small></article>
                 </div>
               </section>
             </div>
@@ -118,19 +98,19 @@
           <article class="slide" data-slide="1" aria-hidden="true">
             <div class="slide-inner">
               <div class="hero-copy">
-                <div class="scene-badge liquid-glass"><span class="pulse-dot"></span>Future lab · Original near-future world</div>
-                <p class="kicker">02 / CITY2049</p>
-                <h1>A future city<br /><em>grounded in decisions.</em></h1>
-                <p class="lead">City2049 connects concrete operations-research experiments through one evolving city. It is a navigation world for asking better questions — not a prediction or a claim that every system is optimised.</p>
-                <div class="actions"><a class="primary-action" href="https://marsguo2049.github.io/city2049/" target="_blank" rel="noreferrer">Enter City2049 ↗</a><a class="text-action" href="https://marsguo2049.github.io/city2049-reference/" target="_blank" rel="noreferrer">Explore references →</a></div>
+                <div class="scene-badge liquid-glass"><span class="pulse-dot violet"></span><span data-i18n data-en="Local models · Reproducible creative workflows" data-zh="本地模型 · 可复现的创作工作流">Local models · Reproducible creative workflows</span></div>
+                <p class="kicker local-kicker" data-i18n data-en="02 / LOCAL AI LAB" data-zh="02 / 本地 AI 实验室">02 / LOCAL AI LAB</p>
+                <h1><span data-i18n data-en="Run the models locally." data-zh="让模型在本地运行，">Run the models locally.</span><br/><em data-i18n data-en="Understand the whole workflow." data-zh="把完整流程真正弄懂。">Understand the whole workflow.</em></h1>
+                <p class="lead" data-i18n data-en="A practical topic around local LLM deployment and ComfyUI: documenting setup, decisions and repeatable workflows for private translation, text-to-image, text-to-video, image-to-video and digital-human applications." data-zh="围绕本地大模型部署与 ComfyUI 的实践主题：记录环境搭建、关键选择和可复现工作流，覆盖私有翻译、文生图、文生视频、图生视频与数字人应用。">A practical topic around local LLM deployment and ComfyUI: documenting setup, decisions and repeatable workflows for private translation, text-to-image, text-to-video, image-to-video and digital-human applications.</p>
+                <div class="actions"><button class="primary-action catalog-trigger" type="button" data-i18n data-en="See Local AI projects" data-zh="查看本地 AI 项目">See Local AI projects</button><button class="text-action" type="button" data-scene-target="0" data-i18n data-en="How it connects to research tools →" data-zh="查看它如何连接科研工具 →">How it connects to research tools →</button></div>
               </div>
 
-              <section class="content-window liquid-glass" aria-label="City2049 overview">
-                <div class="window-bar"><div><i></i><i></i><i></i></div><span>city2049 / world-map</span><b>02</b></div>
-                <div class="window-body city-window">
-                  <div class="city-question"><small>CORE QUESTION</small><h2>What happens when optimisation becomes the operating system of a city?</h2></div>
-                  <div class="city-path"><span>World</span><i></i><span>System</span><i></i><span>Problem</span><i></i><span>Model</span><i></i><span>Experiment</span></div>
-                  <div class="window-links"><a href="https://marsguo2049.github.io/city2049/" target="_blank" rel="noreferrer"><span>Interactive city</span><small class="status published">Published</small></a><a href="https://marsguo2049.github.io/city2049-reference/" target="_blank" rel="noreferrer"><span>Cultural reference library</span><small class="status published">Published</small></a></div>
+              <section class="content-window liquid-glass" aria-label="Local AI projects">
+                <div class="window-bar"><div><i></i><i></i><i></i></div><span>local-ai / workspace</span><b>02</b></div>
+                <div class="window-body local-list">
+                  <article><div class="local-icon">LLM</div><div><h2 data-i18n data-en="Local LLM Deployment" data-zh="本地大模型部署">Local LLM Deployment</h2><p data-i18n data-en="A detailed, hardware-aware path from setup to usable local inference." data-zh="结合硬件条件，从环境搭建到可用本地推理的详细路径。">A detailed, hardware-aware path from setup to usable local inference.</p></div><small class="status development" data-i18n data-en="In development" data-zh="开发中">In development</small></article>
+                  <article><div class="local-icon">译</div><div><h2 data-i18n data-en="Private Translation Workflow" data-zh="私有翻译工作流">Private Translation Workflow</h2><p data-i18n data-en="Use local models for academic translation while keeping material on-device." data-zh="使用本地模型完成学术翻译，让材料留在设备中。">Use local models for academic translation while keeping material on-device.</p></div><small class="status development" data-i18n data-en="In development" data-zh="开发中">In development</small></article>
+                  <article class="comfy-row"><div class="local-icon">UI</div><div><h2 data-i18n data-en="ComfyUI Workflow Guides" data-zh="ComfyUI 工作流教程">ComfyUI Workflow Guides</h2><p data-i18n data-en="Detailed tutorials rather than isolated prompts or screenshots." data-zh="提供完整操作教程，而不是零散提示词或截图。">Detailed tutorials rather than isolated prompts or screenshots.</p><div class="mini-tags"><span data-i18n data-en="Text → Image" data-zh="文生图">Text → Image</span><span data-i18n data-en="Text → Video" data-zh="文生视频">Text → Video</span><span data-i18n data-en="Image → Video" data-zh="图生视频">Image → Video</span><span data-i18n data-en="Digital Human" data-zh="数字人">Digital Human</span></div></div><small class="status development" data-i18n data-en="Tutorials in preparation" data-zh="教程整理中">Tutorials in preparation</small></article>
                 </div>
               </section>
             </div>
@@ -139,42 +119,20 @@
           <article class="slide" data-slide="2" aria-hidden="true">
             <div class="slide-inner">
               <div class="hero-copy">
-                <div class="scene-badge liquid-glass"><span class="pulse-dot"></span>Interactive experiments · Honest methods</div>
-                <p class="kicker">03 / OR PROJECTS</p>
-                <h1>Small systems.<br /><em>Visible decisions.</em></h1>
-                <p class="lead">Interactive experiments make assignments, scheduling, routing and coordination easier to understand. Each project separates optimisation, heuristics and simulation instead of treating them as the same thing.</p>
-                <div class="actions"><a class="primary-action" href="https://marsguo2049.github.io/robot-soccer-team/" target="_blank" rel="noreferrer">Open a live experiment ↗</a><button class="text-action" type="button" data-scene-target="1">See their City2049 context →</button></div>
+                <div class="scene-badge liquid-glass"><span class="pulse-dot"></span><span data-i18n data-en="Future lab · Shared context for OR systems" data-zh="未来实验室 · 运筹系统的共享语境">Future lab · Shared context for OR systems</span></div>
+                <p class="kicker" data-i18n data-en="03 / CITY2049" data-zh="03 / CITY2049">03 / CITY2049</p>
+                <h1><span data-i18n data-en="A future city" data-zh="一座以决策为基础的">A future city</span><br/><em data-i18n data-en="grounded in decisions." data-zh="未来城市。">grounded in decisions.</em></h1>
+                <p class="lead" data-i18n data-en="City2049 is the shared world that gives individual OR experiments a future context. The projects remain independently inspectable; the city connects them without duplicating the project catalogue." data-zh="City2049 是为各个运筹优化实验提供未来语境的共享世界。具体项目仍可独立检查；城市负责连接它们，而不再重复一份项目列表。">City2049 is the shared world that gives individual OR experiments a future context. The projects remain independently inspectable; the city connects them without duplicating the project catalogue.</p>
+                <div class="actions"><a class="primary-action" href="https://marsguo2049.github.io/city2049/" target="_blank" rel="noreferrer" data-i18n data-en="Enter City2049 ↗" data-zh="进入 City2049 ↗">Enter City2049 ↗</a><a class="text-action" href="https://marsguo2049.github.io/city2049-reference/" target="_blank" rel="noreferrer" data-i18n data-en="Explore the reference library →" data-zh="浏览未来参考库 →">Explore the reference library →</a></div>
               </div>
 
-              <section class="content-window liquid-glass" aria-label="Interactive operations research projects">
-                <div class="window-bar"><div><i></i><i></i><i></i></div><span>or-lab / live-experiments</span><b>03</b></div>
-                <div class="window-body project-list">
-                  <a href="https://marsguo2049.github.io/robot-soccer-team/" target="_blank" rel="noreferrer"><span>01</span><div><h2>Robot Soccer</h2><p>Assignment · route search · simulation</p></div><b>↗</b></a>
-                  <a href="https://marsguo2049.github.io/kitchen/" target="_blank" rel="noreferrer"><span>02</span><div><h2>Robo Kitchen</h2><p>Online scheduling · coordination</p></div><b>↗</b></a>
-                  <a href="https://marsguo2049.github.io/drone-swarm/" target="_blank" rel="noreferrer"><span>03</span><div><h2>Drone Swarm</h2><p>Formation assignment · local search</p></div><b>↗</b></a>
-                  <a href="https://marsguo2049.github.io/elevator/" target="_blank" rel="noreferrer"><span>04</span><div><h2>Elevator</h2><p>Dispatch heuristics · simulation</p></div><b>↗</b></a>
-                  <a href="https://marsguo2049.github.io/orbital-network-design/" target="_blank" rel="noreferrer"><span>05</span><div><h2>Orbital Computing</h2><p>Task allocation · network routing</p></div><b>↗</b></a>
-                </div>
-              </section>
-            </div>
-          </article>
-
-          <article class="slide slide-light" data-slide="3" aria-hidden="true">
-            <div class="slide-inner">
-              <div class="hero-copy">
-                <div class="scene-badge liquid-glass"><span class="pulse-dot"></span>Research focus · Ideas in view</div>
-                <p class="kicker">04 / RESEARCH &amp; IDEAS</p>
-                <h1>Research questions,<br /><em>then systems around them.</em></h1>
-                <p class="lead">My core work studies multimodal freight networks under real operational constraints. This portfolio also keeps promising early ideas visible, with clear status labels rather than pretending they are finished projects.</p>
-                <div class="actions"><a class="primary-action" href="https://github.com/marsguo2049" target="_blank" rel="noreferrer">View my GitHub ↗</a><a class="text-action" href="https://moltpany.github.io" target="_blank" rel="noreferrer">Everyday &amp; creative work at Moltpany →</a></div>
-              </div>
-
-              <section class="content-window liquid-glass" aria-label="Research and ideas">
-                <div class="window-bar"><div><i></i><i></i><i></i></div><span>research-map / now-next</span><b>04</b></div>
-                <div class="window-body idea-list">
-                  <article class="idea-feature"><small>DOCTORAL RESEARCH</small><h2>Multimodal freight network optimisation</h2><p>Network design, routing, location, uncertainty and resilience across road, rail, terminals and dry ports.</p></article>
-                  <div class="idea-row"><div><h3>Computing-infrastructure siting</h3><p>Grid-aware capacity and location decisions.</p></div><small class="status concept">Research idea</small></div>
-                  <div class="idea-row"><div><h3>Heterogeneous-agent simulation</h3><p>Connect OR decisions to physical simulation.</p></div><small class="status development">Exploration</small></div>
+              <section class="content-window liquid-glass" aria-label="City2049 overview">
+                <div class="window-bar"><div><i></i><i></i><i></i></div><span>city2049 / system-context</span><b>03</b></div>
+                <div class="window-body city-window">
+                  <div class="city-question"><small data-i18n data-en="CORE QUESTION" data-zh="核心问题">CORE QUESTION</small><h2 data-i18n data-en="What happens when optimisation becomes the operating system of a city?" data-zh="当优化成为一座城市的操作系统，会发生什么？">What happens when optimisation becomes the operating system of a city?</h2></div>
+                  <div class="city-path"><span data-i18n data-en="World" data-zh="世界">World</span><i></i><span data-i18n data-en="System" data-zh="系统">System</span><i></i><span data-i18n data-en="Problem" data-zh="问题">Problem</span><i></i><span data-i18n data-en="Model" data-zh="模型">Model</span><i></i><span data-i18n data-en="Experiment" data-zh="实验">Experiment</span></div>
+                  <div class="window-links"><a href="https://marsguo2049.github.io/city2049/" target="_blank" rel="noreferrer"><span data-i18n data-en="Interactive city" data-zh="交互式未来城市">Interactive city</span><small class="status published" data-i18n data-en="Published" data-zh="已发布">Published</small></a><a href="https://marsguo2049.github.io/city2049-reference/" target="_blank" rel="noreferrer"><span data-i18n data-en="Cultural reference library" data-zh="未来文化参考库">Cultural reference library</span><small class="status published" data-i18n data-en="Published" data-zh="已发布">Published</small></a></div>
+                  <button class="catalog-inline catalog-trigger" type="button"><span data-i18n data-en="View all connected OR systems" data-zh="查看全部关联的运筹系统">View all connected OR systems</span><b>7 ↗</b></button>
                 </div>
               </section>
             </div>
@@ -182,16 +140,66 @@
         </main>
 
         <div class="bottom-area">
-          <div class="portfolio-note"><span><b>marsguo2049</b> · research &amp; work</span><i></i><a href="https://moltpany.github.io" target="_blank" rel="noreferrer"><b>Moltpany</b> · everyday &amp; creative ↗</a></div>
-          <nav class="scene-switcher liquid-glass" aria-label="Switch portfolio window">
-            <button class="is-active" type="button" data-scene-target="0" aria-label="Show Research Tools"><span>01</span><b>Tools</b></button>
-            <button type="button" data-scene-target="1" aria-label="Show City2049"><span>02</span><b>City2049</b></button>
-            <button type="button" data-scene-target="2" aria-label="Show OR Projects"><span>03</span><b>Projects</b></button>
-            <button type="button" data-scene-target="3" aria-label="Show Research and Ideas"><span>04</span><b>Ideas</b></button>
+          <div class="portfolio-note"><span><b>marsguo2049</b> · <span data-i18n data-en="research & work" data-zh="研究与工作">research &amp; work</span></span><i></i><a href="https://moltpany.github.io" target="_blank" rel="noreferrer"><b>Moltpany</b> · <span data-i18n data-en="everyday & creative" data-zh="生活与创意">everyday &amp; creative</span> ↗</a></div>
+          <nav class="scene-switcher liquid-glass" aria-label="Switch portfolio theme">
+            <button class="is-active" type="button" data-scene-target="0"><span>01</span><b data-i18n data-en="Research Tools" data-zh="科研工具">Research Tools</b></button>
+            <button type="button" data-scene-target="1"><span>02</span><b data-i18n data-en="Local AI" data-zh="本地 AI">Local AI</b></button>
+            <button type="button" data-scene-target="2"><span>03</span><b>City2049</b></button>
           </nav>
-          <div class="status-legend"><span><i class="published-dot"></i>Published</span><span><i class="development-dot"></i>In development</span><span><i class="concept-dot"></i>Concept</span></div>
+          <div class="status-legend"><span><i class="published-dot"></i><span data-i18n data-en="Published" data-zh="已发布">Published</span></span><span><i class="development-dot"></i><span data-i18n data-en="In development" data-zh="开发中">In development</span></span><span><i class="concept-dot"></i><span data-i18n data-en="Concept" data-zh="概念">Concept</span></span></div>
         </div>
       </div>
+
+      <aside class="project-catalog" aria-hidden="true" aria-label="All projects">
+        <div class="catalog-backdrop"></div>
+        <div class="catalog-panel liquid-glass">
+          <header class="catalog-header"><div><p data-i18n data-en="PROJECT INDEX" data-zh="项目索引">PROJECT INDEX</p><h2 data-i18n data-en="All projects, clearly classified." data-zh="全部项目，清晰分类。">All projects, clearly classified.</h2><span data-i18n data-en="Public work, active development and future extensions are deliberately separated." data-zh="公开成果、正在开发和未来扩展在这里被明确区分。">Public work, active development and future extensions are deliberately separated.</span></div><button class="catalog-close" type="button" aria-label="Close projects"><i></i><i></i></button></header>
+          <div class="catalog-scroll">
+            <section class="catalog-group">
+              <h3><span>01</span><b data-i18n data-en="Research workflow" data-zh="科研工作流">Research workflow</b></h3>
+              <div class="catalog-grid">
+                <article class="catalog-card"><div><h4 data-i18n data-en="Literature Review Workspace" data-zh="文献综述工作台">Literature Review Workspace</h4><p data-i18n data-en="Topic-led academic review using journal APIs, evidence collection and synthesis; industry research is a possible later extension." data-zh="围绕指定主题，使用期刊 API 完成学术检索、证据收集与综述；业界调查是后续可能扩展。">Topic-led academic review using journal APIs, evidence collection and synthesis; industry research is a possible later extension.</p></div><small class="status development" data-i18n data-en="In development" data-zh="开发中">In development</small></article>
+                <article class="catalog-card"><div><h4 data-i18n data-en="Academic Translation" data-zh="学术翻译">Academic Translation</h4><p data-i18n data-en="Translate English academic papers into clear Chinese, with a local-model path." data-zh="将英文论文翻译为清晰中文，并探索本地模型工作流。">Translate English academic papers into clear Chinese, with a local-model path.</p></div><small class="status development" data-i18n data-en="In development" data-zh="开发中">In development</small></article>
+                <article class="catalog-card"><div><h4 data-i18n data-en="Patent Translation & Drafting" data-zh="专利翻译与撰写">Patent Translation &amp; Drafting</h4><p data-i18n data-en="Extend translation into Chinese patent structure and drafting conventions." data-zh="将翻译进一步转化为符合中文专利结构与写作规范的文本。">Extend translation into Chinese patent structure and drafting conventions.</p></div><small class="status concept" data-i18n data-en="Concept extension" data-zh="概念扩展">Concept extension</small></article>
+                <article class="catalog-card"><div><h4 data-i18n data-en="OR Writing" data-zh="运筹学写作">OR Writing</h4><p data-i18n data-en="Support structure, mathematical explanation and language for OR papers." data-zh="支持运筹学论文的结构、数学解释与语言表达。">Support structure, mathematical explanation and language for OR papers.</p></div><small class="status development" data-i18n data-en="In development" data-zh="开发中">In development</small></article>
+                <a class="catalog-card" href="https://github.com/marsguo2049/Py2Cpp4OR" target="_blank" rel="noreferrer"><div><h4>Py2Cpp4OR</h4><p data-i18n data-en="Documentation-first framework for verified Python-to-C++ OR migration." data-zh="用于可靠完成 Python 至 C++ 运筹优化迁移的文档优先框架。">Documentation-first framework for verified Python-to-C++ OR migration.</p></div><small class="status published" data-i18n data-en="Published · Phase 0" data-zh="已发布 · Phase 0">Published · Phase 0</small></a>
+                <article class="catalog-card"><div><h4 data-i18n data-en="Visual Verification for OR" data-zh="运筹优化可视化核验">Visual Verification for OR</h4><p data-i18n data-en="Turn model and algorithm outputs into views humans can inspect." data-zh="把模型和算法输出转化为人类可以检查的可视化结果。">Turn model and algorithm outputs into views humans can inspect.</p></div><small class="status development" data-i18n data-en="In development" data-zh="开发中">In development</small></article>
+              </div>
+            </section>
+
+            <section class="catalog-group">
+              <h3><span>02</span><b data-i18n data-en="Local AI Lab" data-zh="本地 AI 实验室">Local AI Lab</b></h3>
+              <div class="catalog-grid three">
+                <article class="catalog-card"><div><h4 data-i18n data-en="Local LLM Deployment" data-zh="本地大模型部署">Local LLM Deployment</h4><p data-i18n data-en="Hardware-aware setup, model choices and practical local inference." data-zh="结合硬件条件，整理环境搭建、模型选择与本地推理实践。">Hardware-aware setup, model choices and practical local inference.</p></div><small class="status development" data-i18n data-en="In development" data-zh="开发中">In development</small></article>
+                <article class="catalog-card"><div><h4 data-i18n data-en="Private Translation Workflow" data-zh="私有翻译工作流">Private Translation Workflow</h4><p data-i18n data-en="Connect local models to the academic translation project." data-zh="将本地模型部署连接到学术翻译项目。">Connect local models to the academic translation project.</p></div><small class="status development" data-i18n data-en="In development" data-zh="开发中">In development</small></article>
+                <article class="catalog-card"><div><h4 data-i18n data-en="ComfyUI Workflow Guides" data-zh="ComfyUI 工作流教程">ComfyUI Workflow Guides</h4><p data-i18n data-en="Text/image/video generation and digital-human tutorials with complete steps." data-zh="提供文生图、文生视频、图生视频和数字人的完整操作教程。">Text/image/video generation and digital-human tutorials with complete steps.</p></div><small class="status development" data-i18n data-en="Tutorials in preparation" data-zh="教程整理中">Tutorials in preparation</small></article>
+              </div>
+            </section>
+
+            <section class="catalog-group">
+              <h3><span>03</span><b data-i18n data-en="City2049 &amp; OR Systems" data-zh="City2049 与运筹系统">City2049 &amp; OR Systems</b></h3>
+              <div class="catalog-grid systems">
+                <a class="catalog-card" href="https://marsguo2049.github.io/city2049/" target="_blank" rel="noreferrer"><div><h4>City2049</h4><p data-i18n data-en="Shared future context for concrete OR experiments." data-zh="为具体运筹优化实验提供共享的未来语境。">Shared future context for concrete OR experiments.</p></div><small class="status published" data-i18n data-en="Published" data-zh="已发布">Published</small></a>
+                <a class="catalog-card" href="https://marsguo2049.github.io/city2049-reference/" target="_blank" rel="noreferrer"><div><h4>City2049 Reference</h4><p data-i18n data-en="Cultural references that generate questions and scenarios." data-zh="从文化作品中形成未来问题与情景。">Cultural references that generate questions and scenarios.</p></div><small class="status published" data-i18n data-en="Published" data-zh="已发布">Published</small></a>
+                <a class="catalog-card" href="https://marsguo2049.github.io/robot-soccer-team/" target="_blank" rel="noreferrer"><div><h4>Robot Soccer</h4><p data-i18n data-en="Assignment, route search and simulation." data-zh="任务分配、路径搜索与仿真。">Assignment, route search and simulation.</p></div><small class="status published" data-i18n data-en="Live" data-zh="可访问">Live</small></a>
+                <a class="catalog-card" href="https://marsguo2049.github.io/kitchen/" target="_blank" rel="noreferrer"><div><h4>Robo Kitchen</h4><p data-i18n data-en="Online scheduling and multi-robot coordination." data-zh="在线调度与多机器人协同。">Online scheduling and multi-robot coordination.</p></div><small class="status published" data-i18n data-en="Live" data-zh="可访问">Live</small></a>
+                <a class="catalog-card" href="https://marsguo2049.github.io/drone-swarm/" target="_blank" rel="noreferrer"><div><h4>Drone Swarm</h4><p data-i18n data-en="Formation assignment and local search." data-zh="编队分配与局部搜索。">Formation assignment and local search.</p></div><small class="status published" data-i18n data-en="Live" data-zh="可访问">Live</small></a>
+                <a class="catalog-card" href="https://marsguo2049.github.io/elevator/" target="_blank" rel="noreferrer"><div><h4>Elevator</h4><p data-i18n data-en="Dispatch heuristics and simulation." data-zh="调度启发式与仿真。">Dispatch heuristics and simulation.</p></div><small class="status published" data-i18n data-en="Live" data-zh="可访问">Live</small></a>
+                <a class="catalog-card" href="https://marsguo2049.github.io/orbital-network-design/" target="_blank" rel="noreferrer"><div><h4>Orbital Computing</h4><p data-i18n data-en="Task allocation and network routing." data-zh="任务分配与网络路径设计。">Task allocation and network routing.</p></div><small class="status published" data-i18n data-en="Live" data-zh="可访问">Live</small></a>
+              </div>
+            </section>
+
+            <section class="catalog-group">
+              <h3><span>04</span><b data-i18n data-en="Research directions" data-zh="研究方向">Research directions</b></h3>
+              <div class="catalog-grid three">
+                <article class="catalog-card"><div><h4 data-i18n data-en="Multimodal Freight Networks" data-zh="多式联运网络优化">Multimodal Freight Networks</h4><p data-i18n data-en="Doctoral research in network design, routing, location, uncertainty and resilience." data-zh="围绕网络设计、路径、选址、不确定性与韧性的博士研究。">Doctoral research in network design, routing, location, uncertainty and resilience.</p></div><small class="status research" data-i18n data-en="Doctoral research" data-zh="博士研究">Doctoral research</small></article>
+                <article class="catalog-card"><div><h4 data-i18n data-en="Computing-Infrastructure Siting" data-zh="算力基础设施选址">Computing-Infrastructure Siting</h4><p data-i18n data-en="Grid-aware capacity, location and long-term saturation questions." data-zh="研究电网协同、容量、选址与长期饱和问题。">Grid-aware capacity, location and long-term saturation questions.</p></div><small class="status concept" data-i18n data-en="Research idea" data-zh="研究构想">Research idea</small></article>
+                <article class="catalog-card"><div><h4 data-i18n data-en="Heterogeneous-Agent Simulation" data-zh="异构智能体仿真">Heterogeneous-Agent Simulation</h4><p data-i18n data-en="Connect OR decisions to vehicles, drones and robots in physical simulation." data-zh="把运筹决策连接到车辆、无人机与机器人的物理仿真。">Connect OR decisions to vehicles, drones and robots in physical simulation.</p></div><small class="status development" data-i18n data-en="Exploration" data-zh="探索中">Exploration</small></article>
+              </div>
+            </section>
+          </div>
+        </div>
+      </aside>
     </section>
     <script src="script.js"></script>
   </body>

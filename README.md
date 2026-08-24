@@ -1,37 +1,49 @@
-# Mars Guo — Research, Tools & City2049
+# Mars Guo — Research Tools, Local AI & City2049
 
-Fullscreen GitHub Pages portfolio for the `marsguo2049` work account.
+`marsguo2049` 工作账号的全屏双语 GitHub Pages 主页。  
+Fullscreen bilingual GitHub Pages portfolio for the `marsguo2049` work account.
 
-The homepage is organised as four switchable windows:
+## 三个主题 / Three themes
 
-1. **Research Tools** — the literature-review workflow, Py2Cpp4OR, and visual verification concept.
-2. **City2049** — the shared near-future world and cultural reference library.
-3. **OR Projects** — live interactive experiments in assignment, scheduling, routing, and coordination.
-4. **Research & Ideas** — doctoral research and clearly labelled early directions.
+1. **Research Tools / 科研工具** — 文献综述、学术翻译、OR Writing、Py2Cpp4OR 与可视化核验。
+2. **Local AI Lab / 本地 AI 实验室** — 本地大模型部署、私有翻译工作流与 ComfyUI 教程。
+3. **City2049** — 为独立运筹优化实验提供共享未来语境的交互世界。
 
-## Status language
+`Projects` 和 `Ideas` 不再作为同级主题。所有已发布项目、开发中项目与研究构想统一收录在顶部的 **All Projects / 全部项目** 目录中。
 
-- **Published** — a public repository or live project is available.
-- **In development** — active work exists but is not yet ready to publish.
-- **Concept** — a direction worth communicating without claiming an implementation.
+`Projects` and `Ideas` are no longer treated as peer themes. Published work, active development and research directions are classified in the **All Projects** catalogue.
 
-Py2Cpp4OR is currently presented as a **documentation-first Phase 0 foundation**, not an end-to-end automatic translator.
+## Research Tools / 科研工具
 
-## Account boundary
+The tool map follows a research workflow:
 
-`marsguo2049` is for research, research tools, and City2049. Smaller projects inspired by everyday life, playful interactions, and creative experiments remain separate at [Moltpany](https://moltpany.github.io).
+`Discover → Translate → Write → Implement → Verify`
 
-## Interaction
+- **Literature Review Workspace / 文献综述工作台** — 输入学术主题，通过期刊 API 检索、收集证据并形成综述；开发中。
+- **Academic Translation / 学术翻译** — 英文论文翻译为中文，并连接本地大模型工作流；开发中。
+- **Patent Translation & Drafting / 专利翻译与撰写** — 将翻译扩展为符合中文专利体例的文本；概念扩展。
+- **OR Writing / 运筹学写作** — 运筹学论文的结构、数学解释与语言支持；开发中。
+- **Py2Cpp4OR** — 文档优先的 Python 至 C++ 运筹优化迁移与跨语言核验框架；当前为公开 Phase 0 文档基础，不是端到端自动翻译器。
+- **Visual Verification for OR / 运筹优化可视化核验** — 将模型和算法输出转化为人类可检查的可视化；开发中。
 
-- Use the top navigation or bottom window switcher.
-- On mobile, use the menu or swipe horizontally.
-- Keyboard: arrow keys or numbers `1`–`4`.
-- Reduced-motion preferences are respected.
+## Local AI Lab / 本地 AI 实验室
 
-## Local preview
+- Local LLM deployment / 本地大模型部署。
+- Private academic translation / 私有学术翻译工作流。
+- ComfyUI guides covering text-to-image, text-to-video, image-to-video and digital humans / 覆盖文生图、文生视频、图生视频与数字人的 ComfyUI 教程。
 
-Open `index.html` directly. No build step or external JavaScript dependency is required.
+## Language and interaction / 语言与交互
 
-## Publish
+- Complete English/Chinese switch with saved preference / 完整中英文切换并记忆选择。
+- Bottom switcher changes themes; All Projects opens the full catalogue / 底部切换主题，顶部项目目录展示全部项目。
+- Mobile menu and horizontal swipe / 移动端菜单与左右滑动。
+- Keyboard arrows or numbers `1`–`3` / 键盘方向键或数字 `1`–`3`。
+- Reduced-motion preferences are respected / 支持减少动态效果的系统设置。
 
-GitHub Pages publishes the static site from the repository root on `main`.
+## Account boundary / 账号边界
+
+`marsguo2049` 用于研究、科研工具、本地 AI 与 City2049；生活观察、趣味交互和创意实验继续放在 [Moltpany](https://moltpany.github.io)。
+
+## Local preview and publishing / 本地预览与发布
+
+Open `index.html` directly. No build step or external JavaScript dependency is required. GitHub Pages publishes from the repository root on `main`.

@@ -184,3 +184,19 @@ app.addEventListener('touchend', (event) => {
 }, { passive: true })
 
 setLanguage(language)
+
+const localAiGroup = [...document.querySelectorAll('.catalog-group')].find((group) => group.querySelector('h3 [data-en="Local AI Lab"]'))
+const localAiGrid = localAiGroup?.querySelector('.catalog-grid')
+if (localAiGrid) {
+  localAiGrid.insertAdjacentHTML('beforeend', `
+    <a class="catalog-card" href="https://github.com/marsguo2049/my-llm/blob/main/notes/llm-workflow-or.md" target="_blank" rel="noreferrer">
+      <div>
+        <h4>LLM Workflow OR</h4>
+        <p data-i18n data-en="Treat text, image, video and evaluation models as Python-callable capabilities, then optimize model, configuration and workflow choices for each task." data-zh="把文本、图像、视频和评估模型变成 Python 可调用的能力模块，并进一步优化每个任务的模型、参数与工作流选择。">Treat text, image, video and evaluation models as Python-callable capabilities, then optimize model, configuration and workflow choices for each task.</p>
+      </div>
+      <small class="status concept" data-i18n data-en="Concept → MVP" data-zh="概念 → MVP">Concept → MVP</small>
+    </a>`)
+  setLanguage(language)
+  const updatedProjectCount = document.querySelectorAll('.catalog-card').length
+  document.querySelectorAll('.catalog-trigger > i').forEach((counter) => { counter.textContent = String(updatedProjectCount) })
+}

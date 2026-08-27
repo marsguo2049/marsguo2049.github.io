@@ -1,13 +1,14 @@
-# Mars Guo — Research Tools, Local AI & City2049
+# Mars Guo — Research Tools, Local AI, Autonomous Systems & City2049
 
 `marsguo2049` 工作账号的全屏双语 GitHub Pages 主页。  
 Fullscreen bilingual GitHub Pages portfolio for the `marsguo2049` work account.
 
-## 三个主题 / Three themes
+## 主题 / Themes
 
-1. **Research Tools / 科研工具** — 文献综述、学术翻译、OR Writing、Py2Cpp4OR 与可视化核验。
-2. **Local AI Lab / 本地 AI 实验室** — 本地大模型部署、私有翻译工作流与 ComfyUI 教程。
-3. **City2049** — 为独立运筹优化实验提供共享未来语境的交互世界。
+- **Research Tools / 科研工具** — 围绕真实科研流程构建工具。
+- **Local AI Lab / 本地 AI 实验室** — 从本地模型，到可复用工作流，再到多模型工作流优化。
+- **City2049** — 为独立运筹优化实验提供共享的未来语境。
+- **Autonomous Systems Lab / 无人实验室** — 从单体自主能力走向多智能体、异构协同与系统级 OR。
 
 `Projects` 和 `Ideas` 不再作为同级主题。所有已发布项目、开发中项目与研究构想统一收录在顶部的 **All Projects / 全部项目** 目录中。
 
@@ -28,16 +29,16 @@ The tool map follows a research workflow:
 
 ## Local AI Lab / 本地 AI 实验室
 
-- Local LLM deployment / 本地大模型部署。
-- Private academic translation / 私有学术翻译工作流。
-- ComfyUI guides covering text-to-image, text-to-video, image-to-video and digital humans / 覆盖文生图、文生视频、图生视频与数字人的 ComfyUI 教程。
+- **[My LLM](https://github.com/marsguo2049/my-llm)** — 本地大模型部署、实验与实际使用记录。
+- **[ComfyUI Py Workflow](https://github.com/marsguo2049/comfyui-py-workflow)** — 用 Python 调用并串联本地 ComfyUI 图像与视频工作流。
+- **[Multi-Model Workflow Optimization](https://github.com/marsguo2049/multi-model-workflow-optimization)** — 研究质量、成本与资源权衡下的模型、参数与工作流选择。
 
 ## Language and interaction / 语言与交互
 
 - Complete English/Chinese switch with saved preference / 完整中英文切换并记忆选择。
 - Bottom switcher changes themes; All Projects opens the full catalogue / 底部切换主题，顶部项目目录展示全部项目。
 - Mobile menu and horizontal swipe / 移动端菜单与左右滑动。
-- Keyboard arrows or numbers `1`–`3` / 键盘方向键或数字 `1`–`3`。
+- Keyboard arrows or numbers `1`–`4` / 键盘方向键或数字 `1`–`3`。
 - Reduced-motion preferences are respected / 支持减少动态效果的系统设置。
 
 ## Account boundary / 账号边界

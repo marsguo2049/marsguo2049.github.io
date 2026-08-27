@@ -15,7 +15,7 @@ document.querySelector('.slide-stage')?.insertAdjacentHTML('beforeend', `
     <div class="slide-inner">
       <div class="hero-copy">
         <div class="scene-badge liquid-glass"><span class="pulse-dot violet"></span><span data-i18n data-en="One question · Six-step research map" data-zh="一个问题 · 六步研究地图">One question · Six-step research map</span></div>
-        <p class="kicker local-kicker" data-i18n data-en="04 / AUTONOMOUS SYSTEMS LAB" data-zh="04 / 无人实验室">04 / AUTONOMOUS SYSTEMS LAB</p>
+        <p class="kicker local-kicker" data-i18n data-en="AUTONOMOUS SYSTEMS LAB" data-zh="无人实验室">AUTONOMOUS SYSTEMS LAB</p>
         <h1><span data-i18n data-en="What comes after autonomy?" data-zh="当智能体已经会行动，">What comes after autonomy?</span><br/><em data-i18n data-en="Coordination." data-zh="下一步是协同。">Coordination.</em></h1>
         <p class="lead" data-i18n
           data-en="Cars can drive, robots can manipulate and drones can fly. We study the next question: how should many autonomous agents work together, and how can OR make the whole system better?"
@@ -23,7 +23,7 @@ document.querySelector('.slide-stage')?.insertAdjacentHTML('beforeend', `
         <div class="actions"><a class="primary-action" href="autonomous-lab/" data-i18n data-en="See the six-step map →" data-zh="查看六步研究地图 →">See the six-step map →</a><a class="text-action" href="autonomous-lab/#experiments" data-i18n data-en="See current experiments" data-zh="查看当前实验">See current experiments</a></div>
       </div>
       <section class="content-window liquid-glass" aria-label="Autonomous systems overview">
-        <div class="window-bar"><div><i></i><i></i><i></i></div><span>autonomous-lab / simple-map</span><b>04</b></div>
+        <div class="window-bar"><div><i></i><i></i><i></i></div><span>autonomous-lab / simple-map</span></div>
         <div class="window-body workflow-list compact-five">
           <article><span class="step">01–02</span><div><h2 data-i18n data-en="World + individual ability" data-zh="世界 + 单体能力">World + individual ability</h2><p data-i18n data-en="Build a virtual world, then make one agent able to drive, navigate or manipulate." data-zh="先搭实验世界，再让一个智能体会开车、导航或操作。">Build a virtual world, then make one agent able to drive, navigate or manipulate.</p></div><small class="status development" data-i18n data-en="Foundation" data-zh="基础">Foundation</small></article>
           <article><span class="step">03–04</span><div><h2 data-i18n data-en="Connect + coordinate" data-zh="连接 + 协同">Connect + coordinate</h2><p data-i18n data-en="Connect modules, then let many agents share tasks and resources." data-zh="把模块接起来，再让多个智能体分任务、共享资源。">Connect modules, then let many agents share tasks and resources.</p></div><small class="status development" data-i18n data-en="Multi-agent" data-zh="多智能体">Multi-agent</small></article>
@@ -48,13 +48,13 @@ if (mobileMenuInner) {
   mobileMenuInner.insertBefore(button, catalogButton)
 }
 
-document.querySelector('.scene-switcher')?.insertAdjacentHTML('beforeend', `<button type="button" data-scene-target="3"><span>04</span><b data-i18n data-en="Autonomous Lab" data-zh="无人实验室">Autonomous Lab</b></button>`)
+document.querySelector('.scene-switcher')?.insertAdjacentHTML('beforeend', `<button type="button" data-scene-target="3"><b data-i18n data-en="Autonomous Lab" data-zh="无人实验室">Autonomous Lab</b></button>`)
 
 const catalogScroll = document.querySelector('.catalog-scroll')
 if (catalogScroll) {
   catalogScroll.insertAdjacentHTML('beforeend', `
     <section class="catalog-group">
-      <h3><span>04</span><b data-i18n data-en="Autonomous Systems Lab" data-zh="无人实验室">Autonomous Systems Lab</b></h3>
+      <h3><b data-i18n data-en="Autonomous Systems Lab" data-zh="无人实验室">Autonomous Systems Lab</b></h3>
       <div class="catalog-grid systems">
         <a class="catalog-card" href="autonomous-lab/"><div><h4 data-i18n data-en="Six-step Research Map" data-zh="六步研究地图">Six-step Research Map</h4><p data-i18n data-en="World → individual ability → connection → multi-agent → heterogeneous agents → OR." data-zh="世界 → 单体能力 → 连接 → 多智能体 → 异构智能体 → OR。">World → individual ability → connection → multi-agent → heterogeneous agents → OR.</p></div><small class="status development" data-i18n data-en="Start here" data-zh="从这里开始">Start here</small></a>
         <a class="catalog-card" href="https://github.com/aitorzip/DeepGTAV" target="_blank" rel="noreferrer"><div><h4>GTA Multimodal Agent</h4><p data-i18n data-en="Pick A and B; choose walking, car, rail, boat or aircraft plus transfers and route." data-zh="任选 A 和 B；决定步行、汽车、铁路、船或飞行器，以及换乘和路径。">Pick A and B; choose walking, car, rail, boat or aircraft plus transfers and route.</p></div><small class="status concept" data-i18n data-en="Exploring" data-zh="探索中">Exploring</small></a>
@@ -184,19 +184,3 @@ app.addEventListener('touchend', (event) => {
 }, { passive: true })
 
 setLanguage(language)
-
-const localAiGroup = [...document.querySelectorAll('.catalog-group')].find((group) => group.querySelector('h3 [data-en="Local AI Lab"]'))
-const localAiGrid = localAiGroup?.querySelector('.catalog-grid')
-if (localAiGrid) {
-  localAiGrid.insertAdjacentHTML('beforeend', `
-    <a class="catalog-card" href="https://github.com/marsguo2049/multi-model-workflow-optimization" target="_blank" rel="noreferrer">
-      <div>
-        <h4>Multi-Model Workflow Optimization</h4>
-        <p data-i18n data-en="Treat AI models and configurations as alternative resources, measure quality, cost and latency, then optimize model, parameter and workflow choices across tasks." data-zh="把不同 AI 模型与参数配置视为可替代资源，记录质量、成本与时延，并进一步优化任务中的模型、参数和工作流选择。">Treat AI models and configurations as alternative resources, measure quality, cost and latency, then optimize model, parameter and workflow choices across tasks.</p>
-      </div>
-      <small class="status development" data-i18n data-en="Prototype · public research" data-zh="原型 · 公开研究">Prototype · public research</small>
-    </a>`)
-  setLanguage(language)
-  const updatedProjectCount = document.querySelectorAll('.catalog-card').length
-  document.querySelectorAll('.catalog-trigger > i').forEach((counter) => { counter.textContent = String(updatedProjectCount) })
-}

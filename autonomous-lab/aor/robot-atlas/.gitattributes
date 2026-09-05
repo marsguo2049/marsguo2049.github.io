@@ -1,0 +1,2 @@
+# Preserve canonical illustrated sources byte for byte.
+figures/*.svg -text

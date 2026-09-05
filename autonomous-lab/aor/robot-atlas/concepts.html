@@ -1,0 +1,55 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102a2c"><title>从课程术语读懂本地机器人 · AOR · Mars Guo</title><meta name="description" content="从身体、关节与控制，读懂机器人和地空协作。七张中文图解，配简明解释与知识卡。"><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="atlas.css"></head><body>
+<a class="skip" href="#content">跳到正文</a><header class="top"><a class="brand" href="../index.html">Mars Guo<span> / AOR</span></a><nav aria-label="主导航"><a href="../index.html#demos">看演示</a><a href="../index.html#idea">研究方向</a><a href="../index.html#notes">小笔记</a><a href="index.en.html" lang="en">English guide</a></nav></header>
+<main id="content" class="wrap atlas"><a class="back" href="index.html">← 全部图解</a><h1>从课程术语读懂本地机器人</h1><div class="atlas-reading knowledge"><p>课程原讲义未附在任务中；这里按用户列出的术语作中文对照，不声称复述某页课程内容。具体数值见 <a href="index.html">知识入口</a>，MuJoCo 机制参考官方 <a href="https://mujoco.readthedocs.io/en/stable/overview.html" rel="noreferrer">Overview</a> 与 <a href="https://mujoco.readthedocs.io/en/stable/computation/index.html" rel="noreferrer">Computation</a>。</p>
+<h2 id="先用人话理解这三张表">先用人话理解这三张表</h2>
+<p>把仿真想成管理员在同一张场地里照看机器人、球和桌子。它至少需要记录：</p>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">记录什么</th><th scope="col">存数据的数组</th><th scope="col">要准备多少个格子</th></tr></thead><tbody>
+<tr><td>此刻各物体在哪里、朝向哪里，各关节弯了多少</td><td><code>qpos</code></td><td><code>nq</code></td></tr>
+<tr><td>此刻它们移动、转动或关节变化得多快</td><td><code>qvel</code></td><td><code>nv</code></td></tr>
+<tr><td>此刻要给各驱动通道什么命令</td><td><code>ctrl</code></td><td><code>nu</code></td></tr>
+</tbody></table></div>
+<p><code>n</code> 可以理解为“数量”。比如 <code>nq=21</code> 表示需要 21 个数记录构型；<code>qpos</code> 才装着这 21 个数当前各是多少。已加载的模型不变时，表长通常不变；机器人移动时变化的是表里的数值。</p>
+<p>拿 Duck 举例：身体内部有 14 个转动关节，各用一个角度记录。但 Duck 整体也会走、转身甚至摔倒，所以还需记录它整台身体的位置和朝向。这部分用 3 个位置数和 4 个朝向数，于是 <code>nq=14+3+4=21</code>。这里朝向用的四元数是一种存储方法，先记住它需要 4 个数即可。</p>
+<p>速度表中，14 个关节各有一个转动速度；整台 Duck 另有 3 个平移速度和 3 个转动速度，于是 <code>nv=14+3+3=20</code>。控制表有 14 个关节驱动通道，所以 <code>nu=14</code>。没有额外的“自由基座电机”负责把整台 Duck 直接搬过去。</p>
+<h2 id="为什么机器人球会一起统计">为什么机器人、球会一起统计</h2>
+<p>这三个数量属于一个加载后的 <code>MjModel</code>。如果把 Duck、Stretch 和球放进同一个模型，MuJoCo 就把它们的状态统一放进大数组，每个对象占自己的几段；它们仍然可以由不同控制器控制。统一记录是为了同一次物理步进能处理相互碰撞、夹持和受力，不表示多个机器人的控制策略合并成一个。</p>
+<pre tabindex="0"><code>场景里的 qpos： [Duck 的身体和关节 | 球的位置和朝向 | Stretch 的身体和关节 | 第二个球…]
+场景里的 ctrl： [Duck 的驱动命令   | Stretch 的驱动命令]
+                                    球没有驱动命令</code></pre>
+<p>这是分段存放的示意，实际顺序由编译模型决定；程序应通过名称与地址找到所属段，不能假定所有模型采用相同下标。物理球虽不是“智能体”，仍有状态：本地球可以自由移动和旋转，所以每个新增 <code>7 qpos + 6 qvel</code>，但不新增 <code>ctrl</code>。球被踢动来自碰撞，不需要给球装一个控制通道。</p>
+<p>固定地面、固定桌子通常不增加 <code>nq/nv/nu</code>，但会增加碰撞几何等模型内容。可移动桌子若有自由关节，就要增加状态。碰撞发生、夹爪抓住球，并不会自动把数组变长；<code>mj_step</code> 是把整个场景向前推进一小步，再更新已有数组中的数值。</p>
+<p>所以应同时展示“单个机器人是什么结构”和“这次加载了哪些对象、整个场景有多大的数组”。不能只给组合总数而让读者猜每台机器人有多少关节。结构数量与连接关系见 <a href="structure.html">STRUCTURE.md</a>。</p>
+<h2 id="三种模型先分开">三种“模型”先分开</h2>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">名称</th><th scope="col">解决的问题</th><th scope="col">本地例子</th></tr></thead><tbody>
+<tr><td>机器人描述模型</td><td>身体如何连接、质量/惯性多大、在哪里碰撞、关节怎么动</td><td>Stretch <code>stretch.xml</code>、Duck <code>robot_groundcontact.xml</code>、H1 <code>h1.usd</code></td></tr>
+<tr><td>控制策略/控制器</td><td>给定当前观测与目标，下一步发什么执行器指令</td><td>Duck ONNX + BAM；H1FlatTerrainPolicy；Carter DifferentialController</td></tr>
+<tr><td>OR 数学模型</td><td>谁去哪个目标、走路还是搭车、何时占用支持机器人、优化什么成本</td><td>Vehicle–H1 的方式选择、容量/同步与时序约束；扫地机–Duck–Stretch 仍须依据能力结果建模</td></tr>
+</tbody></table></div>
+<p>关节角、摩擦系数不是任务分配变量；ONNX 网络不是 OR 求解器；机器人能站立也不意味着能完成换乘计划。OR 的时间/速度参数必须说明来自配置、测量还是假设。</p>
+<h2 id="xmlmjcfurdfusd">XML、MJCF、URDF、USD</h2>
+<p>XML 是文本组织语法。MJCF 是 MuJoCo 的描述格式，通常以 <code>&lt;mujoco&gt;</code> 为根，包含身体、关节、惯性、碰撞、执行器等。URDF 也通常采用 XML，但以 <code>&lt;robot&gt;</code> 下的 <code>link</code>/<code>joint</code> 组织机器人。文件扩展名都是 <code>.xml</code> 不表示含义相同。USD 是 Isaac 场景/资产表示，不能因为机器人同名就替换成 MJCF。</p>
+<p>在本地 Duck，<code>scene.xml</code> 包含 <code>robot_groundcontact.xml</code> 并增加静态地面；<code>scene_ball.xml</code> 还包含 <code>ball.xml</code>。把球加入世界会改变整个场景的状态长度。<code>scene_allcollisions.xml</code> 是另一碰撞版本，虽维度相同，也不能视为同一物理模型。</p>
+<p><code>link</code> 可以理解为一块刚体。MJCF 用嵌套 <code>body</code> 表达刚体树，<code>geom</code> 表示可视/碰撞形状；固定在一起的装饰部件不必增加自由度。<code>joint</code> 指定身体相对父身体允许怎样运动，<code>actuator</code> 才规定如何施力或跟踪目标。被动关节、联动关节、自由基座都可能没有独立执行器。</p>
+<h2 id="nqnvnu-与数组">nq、nv、nu 与数组</h2>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">课程符号</th><th scope="col">中文理解</th><th scope="col">本地读取</th></tr></thead><tbody>
+<tr><td><code>nq</code> / <code>qpos</code></td><td>构型坐标的数量 / 当前构型数组</td><td><code>model.nq</code> / <code>data.qpos</code></td></tr>
+<tr><td><code>nv</code> / <code>qvel</code></td><td>速度自由度的数量 / 当前广义速度数组</td><td><code>model.nv</code> / <code>data.qvel</code></td></tr>
+<tr><td><code>nu</code> / <code>ctrl</code></td><td>执行器输入数量 / 当前控制输入数组</td><td><code>model.nu</code> / <code>data.ctrl</code></td></tr>
+<tr><td><code>njnt</code></td><td>joint 元素数，不等于速度自由度</td><td><code>model.njnt</code></td></tr>
+<tr><td><code>mj_step</code></td><td>用控制和外力推进一次动力学积分</td><td><code>mujoco.mj_step(model, data)</code></td></tr>
+</tbody></table></div>
+<p>一个 hinge 或 slide 贡献 <code>1 qpos + 1 qvel</code>；一个 ball joint 贡献 <code>4 + 3</code>；自由基座 free joint 贡献 <code>7 + 6</code>，其中位置占 3 项、单位四元数占 4 项。四元数的四个数不代表四个独立转动自由度。这解释了 Duck 的 <code>nq=7+14=21</code>、<code>nv=6+14=20</code>、<code>nu=14</code>。这里“14 个策略关节”也不等于“15 个 joint 元素”中的全部。</p>
+<p>一个自由球新增 <code>7 qpos + 6 qvel</code>，不增加执行器；Duck 加球得到 <code>28/26/14</code>。v3 组合为 <code>27+21+7+7=62</code> 个构型坐标，<code>26+20+6+6=58</code> 个速度坐标，<code>10+14=24</code> 个输入。静态桌没有自由关节。等式约束会限制运动，却不直接删掉这些数组中的坐标；不能简单用 <code>nv - neq</code> 算“真正自由度”。</p>
+<p><code>qpos/qvel</code> 是机械状态的重要部分，不一定是恢复整台仿真的全部状态；还可能需要 actuator activation (<code>act</code>)、控制器记忆、接触求解和策略历史。Duck 的 61 维观测含上一动作和命令，既不是 <code>nq</code>，也不是 <code>nq+nv</code>。</p>
+<h2 id="坐标与控制的常见误读">坐标与控制的常见误读</h2>
+<p>各卡片以米、秒、弧度说明控制。MJCF <code>body.pos</code> 相对父身体，<code>joint.axis</code> 在该关节所属身体的局部坐标中解释。Duck 的多个 pitch/roll joint 在文件里都写局部 Z 轴：父/子身体的旋转不同，不能因此说它们都绕世界竖直轴转。完整父身体、局部位姿和轴保存在 inventory 的 <code>bodies</code> 与 <code>joints</code>。</p>
+<p>自由关节 <code>qpos</code> 中的基座位姿与 body 局部位姿字段含义不同。MuJoCo 四元数采用 <code>w,x,y,z</code>，本地 Isaac 适配层也用 <code>wxyz</code> 提取朝向；接其他库时必须确认顺序。世界 XY 用于地面目标、Z 为高度；机器人身体坐标中的前向速度需经当前朝向转换到世界坐标。关节速度和自由体角速度不能靠将四元数逐项求导代替。<a href="https://mujoco.readthedocs.io/en/stable/computation/index.html" rel="noreferrer">官方计算说明</a></p>
+<p><code>ctrl</code> 不总是力矩：position actuator 通常接收位置目标，velocity actuator 接收速度目标，motor 的输入经 transmission/gear 转为广义力。Stretch 3 车轮通道用 rad/s，lift 用 m，腕部用 rad；<code>arm</code> 是伸缩腱目标，不能当某一节 slide 的位置。本地 Duck 的原 XML 是位置伺服路径，BAM 编译会在内存中换成 motor，再由 BAM 将关节目标转换成执行器输出。因此必须同时写明模型与控制配置。</p>
+<h2 id="对应一次控制循环">对应一次控制循环</h2>
+<pre tabindex="0"><code># 示意；不在本任务执行。targets 必须符合该具体 actuator 的语义。
+model = mujoco.MjModel.from_xml_path(scene_path)
+data = mujoco.MjData(model)
+data.ctrl[:] = targets
+mujoco.mj_step(model, data)</code></pre>
+<p><code>mj_step</code> 推进物理，并不自动规划路线或调用某个 ONNX 策略。本地 Duck 每 0.02 s 更新策略，每个控制周期调用 4 次 0.005 s 的 <code>mj_step</code>；BAM 在各物理子步更新。一次模型加载或 <code>mj_forward</code> 都不是成功走了一步的证据。具体调用见 <span class="local-record">MicroDuck.step<small>本地核验记录：<code>MuJoCo/scripts/microduck_experiment.py</code></small></span>。</p>
+<p>Isaac 使用 articulation 状态 API 和物理步进，而非 MuJoCo 的这三个数组。课程对照应写“基座位姿/速度、关节状态、目标位置/轮速”，本轮未加载 USD 得到的实际完整维度标未知。</p></div></main><footer><a class="brand" href="../index.html">AOR<span> / Autonomous OR</span></a><p>先认识身体，再理解协作。</p><div><a href="index.html">全部图解</a><a href="sources.html" lang="zh-CN">图件与来源</a><span>© 2026 Mars Guo</span></div></footer></body></html>

@@ -1,0 +1,39 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102a2c"><title>MicroDuck：描述模型、ONNX 策略与辅助步行 · AOR · Mars Guo</title><meta name="description" content="从身体、关节与控制，读懂机器人和地空协作。七张中文图解，配简明解释与知识卡。"><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="atlas.css"></head><body>
+<a class="skip" href="#content">跳到正文</a><header class="top"><a class="brand" href="../index.html">Mars Guo<span> / AOR</span></a><nav aria-label="主导航"><a href="../index.html#demos">看演示</a><a href="../index.html#idea">研究方向</a><a href="../index.html#notes">小笔记</a><a href="index.en.html" lang="en">English guide</a></nav></header>
+<main id="content" class="wrap atlas"><a class="back" href="index.html">← 全部图解</a><p class="eyebrow">KNOWLEDGE CARD / 知识卡</p><h1>MicroDuck：描述模型、ONNX 策略与辅助步行</h1><p class="language-note">模型知识与来源，按需阅读。未发布的实验文件以“本地核验记录”标识；这些数值不构成实机规格。</p><div class="atlas-reading knowledge"><p>MicroDuck 是 Pollen Robotics 的小型双足机器人。在本地，它以 MJCF 描述身体，以 ONNX 网络产生关节目标，再由伺服/BAM 执行器路径驱动物理仿真。当前可靠路线演示还有显式的辅助控制；网络文件存在不等于每个技能在本地都已稳定验收。</p>
+<p>先看<a href="index.html">带标注的图解笔记</a>，再按需阅读本页的详细参数、版本与证据。</p>
+<p><a class="figure-open" href="figures/microduck-anatomy.png" target="_blank" rel="noopener"><img src="figures/microduck-anatomy.png" alt="MicroDuck 结构图：14个身体转动关节，另有一个自由基座；本地模型静态渲染，不是控制成功验收。" loading="lazy" decoding="async"></a></p>
+<h2 id="来源文件和版本">来源、文件和版本</h2>
+<p>历史来源记录见 <span class="local-record">official_stack/provenance.json<small>本地核验记录：<code>MuJoCo/evidence/official_stack/provenance.json</code></small></span>，本轮文件字节另由 <span class="local-record">inventory<small>本地核验记录：<code>docs/robots/runs/20260905-aor012-inventory-01/inventory.json</code></small></span> 的 <code>assets</code> 固定。目录名 <code>develop/main</code> 本身不是不可变版本。</p>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">内容</th><th scope="col">来源与固定记录</th><th scope="col">本地路径</th></tr></thead><tbody>
+<tr><td>MJCF、推理逻辑</td><td><a href="https://github.com/pollen-robotics/microduck_rl" rel="noreferrer">pollen-robotics/microduck_rl</a>，记录 commit <code>29e887ecfbf5d37144759e5a9f8a176dfb83d547</code></td><td><code>MuJoCo/official/microduck_rl-develop/</code></td></tr>
+<tr><td>策略与机器人运行栈</td><td><a href="https://github.com/pollen-robotics/microduck" rel="noreferrer">pollen-robotics/microduck</a>，记录 commit <code>74709cbf22b5850375ecef87e62515af1535dcb4</code></td><td><code>MuJoCo/official/microduck-main/</code></td></tr>
+<tr><td>BAM 执行器模型</td><td><a href="https://github.com/Rhoban/bam" rel="noreferrer">Rhoban/bam</a>，provenance 记录锁定 <code>62bd8ce12154340be97e06f7f41a0ca8f116d967</code></td><td>既有 MuJoCo 环境中安装；本轮未修改</td></tr>
+<tr><td>模型目录</td><td><code>src/mjlab_microduck/robot/microduck/</code>，相对于 RL 根</td><td><span class="local-record">scene.xml<small>本地核验记录：<code>MuJoCo/official/microduck_rl-develop/src/mjlab_microduck/robot/microduck/scene.xml</code></small></span>、<span class="local-record">scene_ball.xml<small>本地核验记录：<code>MuJoCo/official/microduck_rl-develop/src/mjlab_microduck/robot/microduck/scene_ball.xml</code></small></span></td></tr>
+<tr><td>本地适配器</td><td>复用官方 <code>scripts/infer_policy.py</code>，用 inert termios/tty shim 解决 Windows 导入</td><td><span class="local-record">microduck_experiment.py<small>本地核验记录：<code>MuJoCo/scripts/microduck_experiment.py</code></small></span>；遥控入口 <span class="local-record">microduck_teleop.py<small>本地核验记录：<code>MuJoCo/scripts/microduck_teleop.py</code></small></span></td></tr>
+</tbody></table></div>
+<p>RL 与 runtime 的本地根 LICENSE 为 Apache-2.0；资产/策略未见本轮另外核验的逐文件权利清单，不外推为实体硬件设计的统一许可。实际机器人硬件批次/固件版本未知，本卡描述本地仿真资产。</p>
+<p><code>scene.xml</code> 和 <code>scene_ball.xml</code> 都包含 <code>robot_groundcontact.xml</code>，后者另包含球。<code>scene_allcollisions.xml</code> 包含更全面的碰撞模型；历史 provenance 明确浏览器模型是另一个较旧版本。当前加载结果：单体 <code>21/20/14</code>，加球 <code>28/26/14</code>，allcollisions 单体 <code>21/20/14</code>。没有拿浏览器版本代替本地 develop 模型。</p>
+<h2 id="关节和坐标">关节和坐标</h2>
+<p>一个自由基座 <code>trunk_base_freejoint</code> 加 14 个 hinge。左右腿各 5 个：<code>hip_yaw</code>、<code>hip_roll</code>、<code>hip_pitch</code>、<code>knee</code>、<code>ankle</code>，名称分别带 <code>left_</code>/<code>right_</code>；颈/头 4 个：<code>neck_pitch</code>、<code>head_pitch</code>、<code>head_yaw</code>、<code>head_roll</code>。14 个执行器与这些关节同名，基座没有关节执行器。完整 link/body 链、局部坐标、限位和数组地址由 inventory 保存。</p>
+<p>基座构型是世界位置和 wxyz 四元数；状态接口读取世界速度并转换为身体速度，命令 <code>[vx,vy,yaw_rate]</code> 为身体平面方向，单位 m/s、m/s、rad/s。多个关节的 <code>axis_local=[0,0,1]</code> 通过 body 旋转对应不同实际运动方向，不能直接解释成世界偏航。</p>
+<p>包装器允许速度命令范围 <code>vx ∈ [-0.3,0.3]</code>、<code>vy ∈ [-0.2,0.2]</code> m/s，yaw rate 为 ±1.5 rad/s。这些是接口限幅，不是已验收的运行包络或真实最高速度。</p>
+<h2 id="策略的输入输出不是物理状态维度">策略的输入输出不是物理状态维度</h2>
+<p>本轮用 ONNX Runtime 的 <strong>CPUExecutionProvider，仅加载、不推理</strong>核对 walking、stand、kick_right 三个文件，均输入 <code>obs [1,61]</code>，输出 <code>actions [1,14]</code>；记录见 <span class="local-record">policy-metadata.json<small>本地核验记录：<code>docs/robots/runs/20260905-aor012-inventory-01/policy-metadata.json</code></small></span>。</p>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">文件（runtime 的 policies 下）</th><th scope="col">本轮 SHA-256</th></tr></thead><tbody>
+<tr><td><code>alpha_walking.onnx</code></td><td><code>e36332d383997d51401897734cd3e79cf5038406feddb18b4d57ecfb141daa6c</code></td></tr>
+<tr><td><code>alpha_stand.onnx</code></td><td><code>1569268713e40deea795dd2922dba50d3621e15a872855408b6b1b125b1c094b</code></td></tr>
+<tr><td><code>ball_kick_right.onnx</code></td><td><code>147a32c388c6b19111b3ac3b550a9a6dc8b8bf267118af4d8c3712522eedb5af</code></td></tr>
+</tbody></table></div>
+<p>61 项观测按官方推理接口是 gyro 3、投影重力 3、关节位置相对默认姿态 14、关节速度 14、上一动作 14、命令 13。命令又含 twist 3、head pose 4、body pose 6。因此多了一个球或一台 Stretch，也不等于这个网络要接收组合场景的全部 <code>qpos/qvel</code>。</p>
+<p>动作表示默认姿态附近的关节位置偏移；官方路径 scale=1。可选 robotd-like tuning 使用另一缩放/滤波配置，不能混入原策略基线。策略 50 Hz，物理步长 0.005 s，每次策略更新包含 4 次物理步进。原 XML position actuator 可以接受关节位置目标；BAM 路径在内存将 Duck actuator 改为 motor，由 BAM 处理目标、摩擦/电压等执行器效应，再逐物理步更新输出。<code>ctrl</code> 的具体含义必须跟随加载/编译路径说明。</p>
+<h2 id="技能与证据边界">技能与证据边界</h2>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">技能</th><th scope="col">本地资产/接口</th><th scope="col">能力声明</th></tr></thead><tbody>
+<tr><td>站立、平面速度步行</td><td>alpha_stand / alpha_walking；<code>set_velocity</code>、策略切换</td><td>有既有仿真使用记录；本轮没有新控制测试</td></tr>
+<tr><td>踢球</td><td>ball_kick_left/right；<code>trigger_behavior</code></td><td>v3 右踢两球有身体–球接触证据，不能外推全部来球位置/姿态</td></tr>
+<tr><td>坐起、俯身拾取、翻滚</td><td>alpha_sitstand、alpha_ground_pick、roulade 文件和相应接口</td><td>文件存在、接口存在；本轮未验证各行为的稳定性或成功率</td></tr>
+<tr><td>头/身体姿态命令</td><td>4D head 与 6D body command</td><td>可发参数，不等于自主视觉操作</td></tr>
+<tr><td>路线接近 Stretch、桌上往返</td><td>walking policy + v3 水平力/偏航辅助</td><td><code>MICRODUCK_PLANAR_ASSIST_YELLOW</code>，不能称作无辅助步行</td></tr>
+</tbody></table></div>
+<p>v3 既有 <span class="local-record">session.json<small>本地核验记录：<code>MuJoCo/evidence/stretch_microduck_two_high_tables_physical_v3/session.json</code></small></span> 与<span class="local-record">报告<small>本地核验记录：<code>MuJoCo/STRETCH_MICRODUCK_TWO_HIGH_TABLES_PHYSICAL_V3.md</code></small></span>限定：水平力最大 2 N，侧向路线 yaw torque 上限 0.16 N·m，不施加竖直力或 roll/pitch 力矩；重力支撑、跌落、夹持与球碰撞仍由动力学决定。每段步行后有无辅助稳定阶段。桌面与地面位置来自真值，传感器避障没有在此证明。</p>
+<p>被 Stretch 抬起是 Stretch 接触夹持的结果，不能登记为 Duck 自身爬升能力；早期载台/weld 的 BOARD/ALIGHT 也不证明真实上下车。无辅助路线稳定性、扫地机上下车、真实负载与跨模型策略迁移仍未知，后续由对应能力任务提供新证据。</p></div></main><footer><a class="brand" href="../index.html">AOR<span> / Autonomous OR</span></a><p>先认识身体，再理解协作。</p><div><a href="index.html">全部图解</a><a href="sources.html" lang="zh-CN">图件与来源</a><span>© 2026 Mars Guo</span></div></footer></body></html>

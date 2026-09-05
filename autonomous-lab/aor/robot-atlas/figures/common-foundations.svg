@@ -1,0 +1,329 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1170" viewBox="0 0 1600 1170" role="img" aria-labelledby="title desc">
+<title id="title">基础概念：从身体到运动</title><desc id="desc">结构图与状态、控制闭环；MuJoCo术语是课程对照，不是所有平台的统一API。</desc>
+<rect width="1600" height="1170" fill="#f7f5ef"/>
+<text x="70" y="57" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="700" fill="#187e76">AOR  /  ROBOT FIELD NOTES</text>
+<text x="1380" y="57" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="20" font-weight="400" fill="#627477">00 / COMMON</text>
+<text x="70" y="140" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="52" font-weight="700" fill="#233c43">读懂机器人，从这张图开始</text>
+<text x="72" y="198" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="25" font-weight="400" fill="#627477">身体、状态和控制，是读每张知识卡时的三个入口。</text>
+<polyline points="70,225 1530,225" fill="none" stroke="#d9dfd8" stroke-width="2" stroke-linejoin="round"/>
+<text x="72" y="289" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#187e76">01 / STRUCTURE</text>
+<text x="72" y="337" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="33" font-weight="700" fill="#233c43">它由什么组成</text>
+<text x="610" y="289" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#406eab">02 / STATE</text>
+<text x="610" y="337" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="33" font-weight="700" fill="#233c43">现在是什么样</text>
+<text x="1140" y="289" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="19" font-weight="700" fill="#b66032">03 / CONTROL</text>
+<text x="1140" y="337" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="33" font-weight="700" fill="#233c43">怎样让它运动</text>
+<circle cx="90" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="90" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="90" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="90" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="90" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="90" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="90" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="90" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="90" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="90" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="90" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="90" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="90" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="115" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="140" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="165" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="190" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="215" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="240" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="265" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="290" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="315" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="340" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="365" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="390" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="415" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="440" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="465" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="490" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="390" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="415" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="440" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="465" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="490" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="515" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="540" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="565" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="590" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="615" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="640" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="665" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<circle cx="515" cy="690" r="1" fill="#dce2d9" stroke="#dce2d9" stroke-width="1"/>
+<rect x="127" y="655" width="75" height="18" rx="4" fill="#187e76" stroke="none" stroke-width="2"/>
+<polyline points="165,649 165,581" fill="none" stroke="#187e76" stroke-width="18" stroke-linejoin="round"/>
+<polyline points="165,581 330,450 451,513" fill="none" stroke="#9bcac0" stroke-width="30" stroke-linejoin="round"/>
+<polyline points="165,581 330,450 451,513" fill="none" stroke="#187e76" stroke-width="3" stroke-linejoin="round"/>
+<circle cx="165" cy="581" r="17" fill="#f7f5ef" stroke="#187e76" stroke-width="4"/>
+<circle cx="330" cy="450" r="17" fill="#f7f5ef" stroke="#187e76" stroke-width="4"/>
+<polyline points="450,496 470,507 456,530" fill="none" stroke="#187e76" stroke-width="5" stroke-linejoin="round"/>
+<text x="90" y="417" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#187e76">link / body · 刚性身体</text>
+<polyline points="185,429 218,480 235,526" fill="none" stroke="#187e76" stroke-width="2" stroke-linejoin="round"/>
+<text x="315" y="619" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#187e76">joint · 可动连接</text>
+<polyline points="333,586 367,551 330,450" fill="none" stroke="#187e76" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="330" cy="450" r="6" fill="#b66032" stroke="#b66032" stroke-width="2"/>
+<text x="72" y="755" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="24" font-weight="700" fill="#233c43">XML 描述身体、连接与驱动。</text>
+<text x="72" y="799" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#627477">body 不等于一个独立电机。</text>
+<text x="72" y="835" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#627477">joint 数量也不等于控制通道数。</text>
+<text x="610" y="410" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="37" font-weight="700" fill="#406eab">qpos</text>
+<text x="742" y="418" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#233c43">位置 / 朝向 / 关节角</text>
+<rect x="615" y="447" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="629" y="467" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">·</text>
+<rect x="674" y="447" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="688" y="467" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">·</text>
+<rect x="733" y="447" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="747" y="467" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">·</text>
+<rect x="792" y="447" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="806" y="467" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">·</text>
+<rect x="851" y="447" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="865" y="467" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">·</text>
+<rect x="910" y="447" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="924" y="461" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">…</text>
+<rect x="969" y="447" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="983" y="467" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">·</text>
+<polyline points="615,502 615,510 1017,510 1017,502" fill="none" stroke="#406eab" stroke-width="2" stroke-linejoin="round"/>
+<text x="747" y="537" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#406eab">长度 = nq</text>
+<text x="610" y="585" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="37" font-weight="700" fill="#406eab">qvel</text>
+<text x="742" y="583" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#233c43">平移速度 / 转动速度</text>
+<rect x="615" y="612" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="629" y="632" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">·</text>
+<rect x="674" y="612" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="688" y="632" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">·</text>
+<rect x="733" y="612" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="747" y="632" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">·</text>
+<rect x="792" y="612" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="806" y="632" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">·</text>
+<rect x="851" y="612" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="865" y="632" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">·</text>
+<rect x="910" y="612" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="924" y="626" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">…</text>
+<rect x="969" y="612" width="48" height="43" rx="3" fill="#e4ebf4" stroke="none" stroke-width="2"/>
+<text x="983" y="632" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="23" font-weight="400" fill="#406eab">·</text>
+<polyline points="615,667 615,675 1017,675 1017,667" fill="none" stroke="#406eab" stroke-width="2" stroke-linejoin="round"/>
+<text x="747" y="702" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#406eab">长度 = nv</text>
+<text x="610" y="755" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="24" font-weight="700" fill="#233c43">表有多长 ≠ 当前的数值。</text>
+<text x="610" y="799" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#627477">自由基座：7 个位姿数、6 个速度数。</text>
+<text x="610" y="835" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#627477">四元数用 4 个数描述 3 维朝向。</text>
+<rect x="1140" y="401" width="360" height="66" rx="8" fill="#f2e5d9" stroke="none" stroke-width="2"/>
+<text x="1161" y="440" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="27" font-weight="700" fill="#b66032">ctrl   ·   长度 = nu</text>
+<polyline points="1320,480 1320,515" fill="none" stroke="#b66032" stroke-width="3" stroke-linejoin="round"/>
+<polyline points="1314.2468935367497,504.4690092573155 1320,515 1325.7531064632503,504.4690092573155" fill="none" stroke="#b66032" stroke-width="3" stroke-linejoin="round"/>
+<text x="1176" y="562" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="28" font-weight="700" fill="#b66032">actuator · 驱动器</text>
+<polyline points="1320,581 1320,617" fill="none" stroke="#b66032" stroke-width="3" stroke-linejoin="round"/>
+<polyline points="1314.2468935367497,606.4690092573155 1320,617 1325.7531064632503,606.4690092573155" fill="none" stroke="#b66032" stroke-width="3" stroke-linejoin="round"/>
+<text x="1166" y="660" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="27" font-weight="700" fill="#b66032">mj_step · 物理更新</text>
+<text x="1140" y="755" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="24" font-weight="700" fill="#233c43">控制器选命令，物理计算运动。</text>
+<text x="1140" y="799" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#627477">ctrl 的单位由具体驱动器决定。</text>
+<text x="1140" y="835" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#627477">接触、重力也一起影响结果。</text>
+<polyline points="1317,689 1317,710 1060,710 1060,641" fill="none" stroke="#406eab" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1060,641 1030,641" fill="none" stroke="#406eab" stroke-width="3" stroke-linejoin="round"/>
+<polyline points="1040.5309907426845,635.2468935367496 1030,641 1040.5309907426845,646.7531064632504" fill="none" stroke="#406eab" stroke-width="3" stroke-linejoin="round"/>
+<text x="1110" y="699" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="17" font-weight="400" fill="#406eab">状态更新</text>
+<polyline points="72,886 1530,886" fill="none" stroke="#d9dfd8" stroke-width="2" stroke-linejoin="round"/>
+<text x="73" y="945" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="30" font-weight="700" fill="#233c43">同一个“模型”，三种不同职责</text>
+<text x="73" y="1001" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="27" font-weight="700" fill="#187e76">描述模型</text>
+<text x="73" y="1048" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#627477">身体是什么 · MJCF / URDF / USD</text>
+<text x="595" y="1002" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="27" font-weight="700" fill="#b66032">控制策略</text>
+<text x="595" y="1048" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#627477">怎样动 · 关节策略 / 轮速控制</text>
+<text x="1115" y="1001" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="27" font-weight="700" fill="#406eab">OR 数学模型</text>
+<text x="1115" y="1048" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="22" font-weight="400" fill="#627477">谁做什么、何时做 · 变量与约束</text>
+<polyline points="70,1100 1530,1100" fill="none" stroke="#d9dfd8" stroke-width="2" stroke-linejoin="round"/>
+<text x="70" y="1141" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#627477">课程对照以 MuJoCo 为例 · 机械臂为概念示意 · 其他平台按自己的状态与控制接口解释</text>
+<text x="1280" y="1139" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="18" font-weight="400" fill="#627477">AOR-012 · 2026-09-05</text>
+</svg>

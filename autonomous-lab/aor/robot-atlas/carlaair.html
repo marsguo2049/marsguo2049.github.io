@@ -1,0 +1,36 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102a2c"><title>CarlaAir：读懂地面车辆与无人机 · AOR · Mars Guo</title><meta name="description" content="从身体、关节与控制，读懂机器人和地空协作。七张中文图解，配简明解释与知识卡。"><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="atlas.css"></head><body>
+<a class="skip" href="#content">跳到正文</a><header class="top"><a class="brand" href="../index.html">Mars Guo<span> / AOR</span></a><nav aria-label="主导航"><a href="../index.html#demos">看演示</a><a href="../index.html#idea">研究方向</a><a href="../index.html#notes">小笔记</a><a href="index.en.html" lang="en">English guide</a></nav></header>
+<main id="content" class="wrap atlas"><a class="back" href="index.html">← 全部图解</a><p class="eyebrow">KNOWLEDGE CARD / 知识卡</p><h1>CarlaAir：读懂地面车辆与无人机</h1><p class="language-note">模型知识与来源，按需阅读。未发布的实验文件以“本地核验记录”标识；这些数值不构成实机规格。</p><div class="atlas-reading knowledge"><p>CarlaAir 适合用“<strong>身体/载体 → 状态与坐标 → 控制接口 → 协作事件</strong>”来读。身体仍然重要，但这里先认道路车辆的 <code>blueprint / actor</code> 和 AirSim 的具名飞行器，再看它们接收什么任务命令；不把 MuJoCo 的关节数组生搬过来。</p>
+<p><a class="figure-open" href="figures/carlaair-cooperation.png" target="_blank" rel="noopener"><img src="figures/carlaair-cooperation.png" alt="CarlaAir 地空协作：Sprinter 与 Drone1 历史会合画面，分别解释道路控制、NED 飞行命令和 WAIT/READY 同步。" loading="lazy" decoding="async"></a></p>
+<h2 id="我们具体用的是什么">我们具体用的是什么</h2>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">对象</th><th scope="col">本地可核实的身份</th><th scope="col">尚未核实的版本与结构</th></tr></thead><tbody>
+<tr><td>地面 Sprinter</td><td>CARLA blueprint <code>vehicle.mercedes.sprinter</code>；<span class="local-record">live_preflight.py<small>本地核验记录：<code>CarlaAir/autonomous_or_adapter/live_preflight.py</code></small></span> 明确检查该绑定</td><td>打包车辆网格、轮胎/悬挂参数与资产依赖版本未知；不能用另一个车型替代</td></tr>
+<tr><td>Drone1 / Drone2</td><td><span class="local-record">双无人机配置<small>本地核验记录：<code>CarlaAir/AirSimConfig/settings.stage2_v1b_2drones.json</code></small></span> 中分别具名，<code>VehicleType=SimpleFlight</code>、<code>SimMode=Multirotor</code></td><td>具体 pawn 网格、质量/惯性/旋翼配置及二进制构建版本未知；SimpleFlight 是控制栈选择，不是可据此认定的硬件型号</td></tr>
+<tr><td>当前图中组合</td><td>Sprinter + Drone1 的历史同步演示帧；不把 Drone2 配置当作它参与了此场景</td><td>该图不提供全体车辆/飞行器机械关节清单</td></tr>
+</tbody></table></div>
+<p>本地入口是 <span class="local-record">CarlaAir/README.md<small>本地核验记录：<code>CarlaAir/README.md</code></small></span>，开发目录与独立发布仓库 <code>my-carlaair</code> 分开。原型源码和配置以本次<span class="local-record">来源快照<small>本地核验记录：<code>docs/robots/runs/20260905-aor012-atlas/source-snapshot.json</code></small></span>的文件哈希定位。这里没有启动引擎或查询服务端版本，所以 <strong><code>SettingsVersion=1.2</code> 仅是配置格式版本，不是 AirSim 软件版本</strong>；也不从网上最新文档推断本机 CARLA/AirSim 构建号。运行栈、模型网格与二进制资产的许可须按各自分发包核查，本次未知，不把截图中的车型称为已核清许可的开源机器人。</p>
+<h2 id="对照课程哪些概念保留哪些需要换一种问法">对照课程：哪些概念保留，哪些需要换一种问法</h2>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">课程里的问法</th><th scope="col">在 CarlaAir 中先看什么</th></tr></thead><tbody>
+<tr><td>XML / link / joint：身体怎么连接？</td><td>车辆 blueprint、actor 实例、物理/碰撞体、轮胎和悬挂；无人机 pawn、机体与旋翼。仅凭画面不能统计完整关节。</td></tr>
+<tr><td><code>qpos / qvel</code>：在哪里、动多快？</td><td>车辆 transform / velocity；无人机 <code>kinematics_estimated</code> 的位置、姿态与速度。名字和结构不同，但仍是在读状态。</td></tr>
+<tr><td><code>ctrl</code>：向哪里发命令？</td><td>地面任务目标交给 Traffic Manager；飞行目标交给 AirSim 高层 API。底层控制器继续计算车辆控制或飞行器动作。</td></tr>
+<tr><td><code>nq / nv / nu</code>：表有多长？</td><td>不适用这组 MuJoCo 模型字段。不能把 <code>[x,y,z,speed]</code> 的四个 API 参数叫做四个电机，也不能由“四旋翼”猜 <code>nu=4</code>。</td></tr>
+<tr><td><code>mj_step</code>：世界怎样推进？</td><td>CARLA/AirSim 的引擎与同步设置推进物理；RPC 命令、轮询和任务事件不是同一个物理时间步。</td></tr>
+<tr><td>多智能体怎样区分？</td><td>地面 actor ID、逻辑 agent ID、<code>vehicle_name</code> 分开记录；给 Drone1 的命令不能省略名字而误发默认飞行器。</td></tr>
+</tbody></table></div>
+<h2 id="控制链与观察链">控制链与观察链</h2>
+<p>地面 <span class="local-record">V1B 适配器<small>本地核验记录：<code>CarlaAir/mission_execution/v1b_ground_adapter.py</code></small></span> 将目标点变成 CARLA <code>Location</code>，启用 autopilot 并调用 <code>TrafficManager.set_path</code>。Traffic Manager 再驱动车辆；适配器停车时明确发送零油门、全制动和手刹。手动演示中的 <code>VehicleControl(throttle, steer, brake)</code> 是另一个接口层次，不能说 OR 求解器在逐帧计算方向盘。</p>
+<p>空中 <span class="local-record">具名适配器<small>本地核验记录：<code>CarlaAir/mission_execution/v1b_drone_adapter.py</code></small></span> 将任务目标作为 NED 坐标发送给 <code>moveToPositionAsync</code>，同时传速度与 <code>vehicle_name</code>，随后读取位置、速度、碰撞等状态并判断到达。它复用 SimpleFlight 的飞行控制；本地短航段速度上限处理不等于新开发了飞控策略。</p>
+<p>这两条链都有物理运动，但初始化中的 <code>simSetVehiclePose</code> 属于摆放/恢复，不能计为飞行；相机画面能收到也不意味着它参与了导航。<span class="local-record">双机相机配置<small>本地核验记录：<code>CarlaAir/AirSimConfig/settings.stage2_v1b_2drones.json</code></small></span> 声明 <code>bottom_center</code>、640×480、90° FOV、向下俯视。配置分辨率、实际收帧、识别目标、根据识别结果闭环控制，是四件不同的事。</p>
+<h2 id="最容易踩坑的是坐标与时间">最容易踩坑的是坐标与时间</h2>
+<p>CARLA API 的位置单位为米、欧拉角为度，采用 X 前、Y 右、Z 上的左手坐标约定；AirSim API 使用米制 NED，Z 向下。参考 <a href="https://carla.readthedocs.io/en/latest/coordinates/" rel="noreferrer">CARLA 坐标文档</a> 与 <a href="https://microsoft.github.io/AirSim/apis/#coordinate-system" rel="noreferrer">AirSim API 坐标说明</a>，查阅于 2026-09-05；这些说明不替代本机打包版本核验。</p>
+<p>本地 <span class="local-record">DroneFollower.calibrate<small>本地核验记录：<code>CarlaAir/examples/demo_drive_and_fly.py</code></small></span> 对轴向已经对齐的两个世界建立偏移：</p>
+<pre tabindex="0"><code>x_air =  x_carla + ox
+y_air =  y_carla + oy
+z_air = -z_carla + oz</code></pre>
+<p>假设标定所得 <code>oz=2 m</code>，CARLA 中高度 <code>z=12 m</code> 对应 AirSim <code>z=-10 m</code>。这是帮助理解的算例，不是某次运行的标定值。换了地图原点、出生点或引擎轴向，应重核标定；若轴向还有旋转，就不能继续只用这三个偏移量。姿态、速度向量、角度单位也须各自转换，不能只转换目标位置。</p>
+<p>对会合而言，还要区分仿真时间、墙钟时间、命令派发时间、观测时间与事件时间。<code>moveToPositionAsync</code> 返回不等于无人机已经到达；一张旧图也不能证明“现在 READY”。要有实际位置/速度、稳定保持与新鲜观测，才可生成相应会合事件。</p>
+<h2 id="已经证明到哪一步">已经证明到哪一步</h2>
+<p>固定证据 <span class="local-record">dual_sync_retry_acceptance.json<small>本地核验记录：<code>CarlaAir/experiments/autonomous_or_v0_6a/transfer_sync/dual_sync_retry_acceptance.json</code></small></span> 接受的是 <strong>Sprinter–Drone1 的并发移动、先到等待、双端 READY 与同步</strong>；它明确排除 HANDOFF、custody 变更、delivery 以及故障恢复，也不代表整个 v0.6a 验收完成。图中使用的是稍后的<span class="local-record">同步演示原帧<small>本地核验记录：<code>CarlaAir/experiments/autonomous_or_v0_6a/sync_demo/20260902T153849246615Z/run_01/frames/both_ready.png</code></small></span>，保留原图的 presentation-only 标注；画面用于说明，验收结论追到 JSON。</p>
+<p>按 <span class="local-record">组件当前入口<small>本地核验记录：<code>CarlaAir/README.md</code></small></span>，inspection 仍是逻辑计时服务，路径/任务使用仿真真值，不宣称视觉巡检；cargo/custody 是逻辑合同，不等于实物装卸。平台具名 2G2A 接入也不自动证明多 worker 的 OR 调度闭环。</p>
+<p>这里的三种“模型”也要分开：<strong>车辆/飞行器描述及物理参数</strong>决定能怎样运动；<strong>Traffic Manager / SimpleFlight</strong>负责实际控制；<strong>OR 数学模型</strong>安排任务分配、路径选择和同步约束。当前 CarlaAir 并发执行器来自本地 <code>autonomous_or_adapter/runtime_v0_6a.py</code>，它的历史 live 成果不能直接算作共享 Execution 执行器验收。</p></div></main><footer><a class="brand" href="../index.html">AOR<span> / Autonomous OR</span></a><p>先认识身体，再理解协作。</p><div><a href="index.html">全部图解</a><a href="sources.html" lang="zh-CN">图件与来源</a><span>© 2026 Mars Guo</span></div></footer></body></html>

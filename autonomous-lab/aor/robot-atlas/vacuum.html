@@ -1,0 +1,26 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102a2c"><title>AOR-013 简化扫地底盘：从外观到接触载运 · AOR · Mars Guo</title><meta name="description" content="从身体、关节与控制，读懂机器人和地空协作。七张中文图解，配简明解释与知识卡。"><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="atlas.css"></head><body>
+<a class="skip" href="#content">跳到正文</a><header class="top"><a class="brand" href="../index.html">Mars Guo<span> / AOR</span></a><nav aria-label="主导航"><a href="../index.html#demos">看演示</a><a href="../index.html#idea">研究方向</a><a href="../index.html#notes">小笔记</a><a href="index.en.html" lang="en">English guide</a></nav></header>
+<main id="content" class="wrap atlas"><a class="back" href="index.html">← 全部图解</a><p class="eyebrow">KNOWLEDGE CARD / 知识卡</p><h1>AOR-013 简化扫地底盘：从外观到接触载运</h1><p class="language-note">模型知识与来源，按需阅读。未发布的实验文件以“本地核验记录”标识；这些数值不构成实机规格。</p><div class="atlas-reading knowledge"><p>这是本地研究用的<strong>简化差速底盘</strong>，不是 OOMWOO 精确整机复现，也不是早期三个平面执行器的 Vehicle 载台。图中同时放入旧车，帮助识别两种运动机制。</p>
+<p><a class="figure-open" href="figures/vehicle-mechanisms.png" target="_blank" rel="noopener"><img src="figures/vehicle-mechanisms.png" alt="左侧旧载台依赖三个平面执行器，右侧扫地底盘有自由基座、两轮驱动与接触支点；底部展示底盘仰视。" loading="lazy" decoding="async"></a></p>
+<h2 id="来源与具体版本">来源与具体版本</h2>
+<p>图件加载固定的 <span class="local-record">continuation-flat-round1-flat/model.xml<small>本地核验记录：<code>MuJoCo/output/aor013-20260905T114012081914Z-continuation-flat-round1-flat/model.xml</code></small></span>，配置见<span class="local-record">同一 run 的 config.json<small>本地核验记录：<code>MuJoCo/output/aor013-20260905T114012081914Z-continuation-flat-round1-flat/config.json</code></small></span>。该版本有雷达凸包，<strong>无托盘、无坡道、无外力辅助</strong>；图仅隔离显示 vehicle 子树，不运行该失败步行试验。模型完整计数、相机、静态姿态及哈希见<span class="local-record">渲染核验<small>本地核验记录：<code>docs/robots/runs/20260905-aor012-atlas-render-05/render.json</code></small></span>。</p>
+<p>AOR-013 的<span class="local-record">资产审计<small>本地核验记录：<code>MuJoCo/output/aor013-20260905T105022716475Z-asset-audit/asset_audit.json</code></small></span> 记录 OOMWOO commit <code>ed938ba6687fa8dc8908832591614bd7680b4aff</code>、OOMWOO-One commit <code>2cbfa09204795a36c880bbdb46971266051ae34d</code>，选取 10 个文件共 81,928 字节。对应 <span class="local-record">LICENSE<small>本地核验记录：<code>MuJoCo/output/aor013-20260905-source-audit/LICENSE</code></small></span> 与 package 声明 Apache-2.0；硬件许可仍待定。URDF/xacro 直接导入失败，参数还带有 Proscenic M6 Pro 来源，因此本地选择重新建立明确标注的简化 MuJoCo 底盘，不能把参考参数、研究几何与官方整机画等号。候选目录的早期来源缺口保留为历史核查边界，新增固定审计见这里。</p>
+<h2 id="身体关节与控制">身体、关节与控制</h2>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">内容</th><th scope="col">固定 run 的实际定义</th></tr></thead><tbody>
+<tr><td>身体尺寸</td><td>圆盘直径 0.349 m；平台顶高 0.079 m；雷达凸包高出 0.018 m</td></tr>
+<tr><td>驱动几何</td><td>轮半径 0.034 m、轮距 0.235 m；两个低摩擦固定球形支点代替脚轮</td></tr>
+<tr><td>质量参数</td><td>圆盘 <code>base_mass_kg=2.5</code>，另有轮、雷达凸包和支点质量；不是整机总质量 2.5 kg 的实测声明</td></tr>
+<tr><td>bodies</td><td><code>vehicle</code>、<code>vehicle_left_wheel</code>、<code>vehicle_right_wheel</code>，共 3 个；支点和雷达是 geom，不额外增加 body</td></tr>
+<tr><td>joints</td><td><code>vehicle_free</code> 为自由基座；<code>vehicle_left_joint</code>、<code>vehicle_right_joint</code> 为轮 hinge，共 3 个 joint 元素</td></tr>
+<tr><td>actuators</td><td>左右轮速度伺服各一个，<code>vehicle_left_drive</code> / <code>vehicle_right_drive</code>；每轮力矩限制 ±0.5 N·m</td></tr>
+<tr><td>根运动</td><td>free joint，可平移、旋转和倾覆；没有平面根执行器，没有 payload weld，固定模型 <code>neq=0</code></td></tr>
+</tbody></table></div>
+<p>车体局部 X 前、Y 侧向、Z 上；轮轴为本地 <code>[0,1,0]</code>，左右轮在 Y 两侧。自由根的 qpos 记录世界位置与四元数，qvel 分别记录平移与转动速度，不能把两者当成同样长度的欧拉角表。轮速 <code>ctrl</code> 为 rad/s，产生驱动力矩后通过轮地接触推动车体；目标速度、实际速度与位移仍须分别测量。</p>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">统计对象</th><th scope="col">nq</th><th scope="col">nv</th><th scope="col">nu</th><th scope="col">含义</th></tr></thead><tbody>
+<tr><td>该模型中的扫地底盘子树</td><td>9</td><td>8</td><td>2</td><td>free 的 7/6 + 两轮的 2/2；两个轮速输入</td></tr>
+<tr><td>同一个完整冻结模型</td><td>30</td><td>28</td><td>16</td><td>Duck 21/20/14 + 底盘 9/8/2；没有自由球</td></tr>
+</tbody></table></div>
+<p>这些数值来自本次 CPU 加载与具名子树统计；单体贡献不是另建一份模型后得出的独立运行结果。AOR-013 某些其他版本加入托盘、坡道或静态停车 Stretch；尤其停车 Stretch 2 已去除关节，不能给这些组合机械地加上其单体 <code>24/23/8</code>。</p>
+<h2 id="已有片段与未通过的整条链">已有片段与未通过的整条链</h2>
+<p>本轮只引用 AOR-013 的<span class="local-record">首轮报告<small>本地核验记录：<code>MuJoCo/experiments/vacuum_duck/REPORT.md</code></small></span>和<span class="local-record">第二阶段报告<small>本地核验记录：<code>MuJoCo/experiments/vacuum_duck/continuation_v1/REPORT.md</code></small></span>，不重新验收。后者明确：原高度直接上车、直接下车失败；裸底盘独立初始放置后的 standing 起立通过；另一独立平地测试通过 4 cm 接近保持。<strong>这些片段不连续，完整运输链仍未通过，4 cm 停稳也不等于满足 Stretch 抓取前置条件。</strong></p>
+<p>首轮固定长坡道、大托盘与有界 XY/yaw 辅助的上下车片段，属于另一组配置。图中裸底盘不暗含这些设施或辅助。真值航向反馈是观测/控制假设，不是视觉导航；静态停车 Stretch 不是已运行的接触抓取控制器。具体视频、失败记录和后续方案选择继续由 AOR-013 维护，本卡提供结构解释与固定来源引用。</p></div></main><footer><a class="brand" href="../index.html">AOR<span> / Autonomous OR</span></a><p>先认识身体，再理解协作。</p><div><a href="index.html">全部图解</a><a href="sources.html" lang="zh-CN">图件与来源</a><span>© 2026 Mars Guo</span></div></footer></body></html>

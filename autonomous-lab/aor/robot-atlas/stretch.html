@@ -1,0 +1,36 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102a2c"><title>Stretch：分清 Stretch 2、Stretch 3 与任务装置 · AOR · Mars Guo</title><meta name="description" content="从身体、关节与控制，读懂机器人和地空协作。七张中文图解，配简明解释与知识卡。"><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="atlas.css"></head><body>
+<a class="skip" href="#content">跳到正文</a><header class="top"><a class="brand" href="../index.html">Mars Guo<span> / AOR</span></a><nav aria-label="主导航"><a href="../index.html#demos">看演示</a><a href="../index.html#idea">研究方向</a><a href="../index.html#notes">小笔记</a><a href="index.en.html" lang="en">English guide</a></nav></header>
+<main id="content" class="wrap atlas"><a class="back" href="index.html">← 全部图解</a><p class="eyebrow">KNOWLEDGE CARD / 知识卡</p><h1>Stretch：分清 Stretch 2、Stretch 3 与任务装置</h1><p class="language-note">模型知识与来源，按需阅读。未发布的实验文件以“本地核验记录”标识；这些数值不构成实机规格。</p><div class="atlas-reading knowledge"><p>图解：<a href="03.html">Stretch 3 主图与 Stretch 2 对照</a>，引线解释伸缩联动、腕部、夹爪、升降与底盘。</p>
+<p>当前双高桌 v3 演示使用 <strong>Stretch 3 / Dex Wrist 3</strong>。早期 v0 使用 Stretch 2，二者在本地有不同文件、关节和控制输入，不能统称“17-DOF Stretch”。版本来源是固定的 MuJoCo Menagerie commit <code>e4049d0a3bfd58d2a3081614e6777d4007e3f86a</code>，厂家为 Hello Robot；Menagerie 的转换/简化描述不等于实机全部结构与能力。</p>
+<h2 id="本地模型版本">本地模型版本</h2>
+<p>共同父路径是 <code>MuJoCo/official/mujoco_menagerie-e4049d0a3bfd58d2a3081614e6777d4007e3f86a/</code>。</p>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">模型</th><th scope="col">文件、来源与许可</th><th scope="col">本次 CPU 加载</th></tr></thead><tbody>
+<tr><td>Stretch 2</td><td><span class="local-record">hello_robot_stretch/stretch.xml<small>本地核验记录：<code>MuJoCo/official/mujoco_menagerie-e4049d0a3bfd58d2a3081614e6777d4007e3f86a/hello_robot_stretch/stretch.xml</code></small></span>；同目录 README 说明由 Hello Robot URDF/资产转换，Clear BSD</td><td><code>nq=24, nv=23, nu=8, njnt=18</code></td></tr>
+<tr><td>Stretch 3</td><td><span class="local-record">hello_robot_stretch_3/stretch.xml<small>本地核验记录：<code>MuJoCo/official/mujoco_menagerie-e4049d0a3bfd58d2a3081614e6777d4007e3f86a/hello_robot_stretch_3/stretch.xml</code></small></span>；同目录 README 说明由 Hello Robot 提供，Apache-2.0</td><td><code>nq=27, nv=26, nu=10, njnt=21</code></td></tr>
+</tbody></table></div>
+<p>Stretch 2 XML SHA-256：<code>4f33408242b90acbe4ca0f4b544ca5efae4f423c92ef71358f0977ec0b03a316</code>。</p>
+<p>Stretch 3 XML SHA-256：<code>154088989df3b3d01a184b8e2df7cb82481efcd532f2498719acf1d77f001a6d</code>。</p>
+<p>两者完整资产与原脚本哈希见 <span class="local-record">inventory<small>本地核验记录：<code>docs/robots/runs/20260905-aor012-inventory-01/inventory.json</code></small></span>。这些计数包含被动柔顺关节、联动关节与自由基座，<code>nu</code> 不是 joint 数。</p>
+<h2 id="关节link-与输入">关节、link 与输入</h2>
+<p>Stretch 2 包含自由基座加 17 个标量关节；Stretch 3 包含自由基座加 20 个标量关节。主要运动链是 <code>base_link → link_lift → 伸缩臂 → wrist → gripper</code>，头部为另一个分支。Stretch 3 增加 wrist pitch/roll 与头部导航相机关节；橡胶指尖的 <code>rubber_left_x/y</code>、<code>rubber_right_x/y</code> 是被动柔顺建模，导航相机关节也没有对应独立输入。</p>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">功能</th><th scope="col">Stretch 2 的 actuator</th><th scope="col">Stretch 3 的 actuator / 控制含义</th></tr></thead><tbody>
+<tr><td>行驶/转向</td><td><code>forward</code>、<code>turn</code>，作用在轮关节的 tendon 组合</td><td><code>left_wheel_vel</code>、<code>right_wheel_vel</code>，直接轮角速度 rad/s</td></tr>
+<tr><td>升降</td><td><code>lift → joint_lift</code></td><td>同名位置目标，m</td></tr>
+<tr><td>伸缩</td><td><code>arm_extend → extend</code></td><td><code>arm → extend</code>，4 节 slide 合成的 tendon 长度目标，m</td></tr>
+<tr><td>腕部</td><td><code>wrist_yaw</code></td><td><code>wrist_yaw</code>、<code>wrist_pitch</code>、<code>wrist_roll</code>，rad</td></tr>
+<tr><td>夹爪</td><td><code>grip → joint_gripper_slide</code></td><td><code>gripper → joint_gripper_slide</code>，m；等式联动两指，指关节本身是 hinge</td></tr>
+<tr><td>头部</td><td><code>head_pan</code>、<code>head_tilt</code></td><td>同名位置目标，rad</td></tr>
+</tbody></table></div>
+<p><code>joint_arm_l0/l1/l2/l3</code> 的位置通过等式关联，<code>extend</code> 把它们相加。<code>ctrl[arm]</code> 不是每一节都走同样数值。完整输入顺序、gain、bias、gear、限位、父子 body 与局部轴见 inventory 对应 <code>models</code> 项。组合时加 <code>stretch_</code> 前缀；不要把单体的数组偏移用于组合场景。</p>
+<p>世界 XY 为地面位置，Z 为竖直方向；基座是自由刚体。关节轴是局部坐标：升降与各伸缩节虽都显示局部 Z，身体旋转使伸缩运动不沿世界竖直方向。两代轮关节局部轴符号也不同，换模型必须重新确认控制方向。任务用真值位置、接触、关节状态完成对齐，而非视觉识别或激光导航。</p>
+<h2 id="版本对应的技能与保真度">版本对应的技能与保真度</h2>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">任务版本</th><th scope="col">控制/附加装置</th><th scope="col">可以声明的事实</th></tr></thead><tbody>
+<tr><td><span class="local-record">v0<small>本地核验记录：<code>MuJoCo/STRETCH_MICRODUCK_V0.md</code></small></span> / <span class="local-record">原脚本<small>本地核验记录：<code>MuJoCo/scripts/stretch_microduck_demo.py</code></small></span></td><td>Stretch 2 原执行器 + 固定于 lift 的自定义托盘 + 可切换 Duck weld</td><td>升降/行驶执行器工作；Duck 载运含逻辑附着，不能当原厂夹爪直接抓取</td></tr>
+<tr><td><span class="local-record">grasped carrier v2<small>本地核验记录：<code>MuJoCo/STRETCH_MICRODUCK_GRASPED_CARRIER_V2.md</code></small></span></td><td>Stretch 3 抓外部载板</td><td>接触抓载板与直接抓 Duck 是两个不同任务</td></tr>
+<tr><td><span class="local-record">双高桌 physical v3<small>本地核验记录：<code>MuJoCo/STRETCH_MICRODUCK_TWO_HIGH_TABLES_PHYSICAL_V3.md</code></small></span></td><td>Stretch 3 原夹爪抓 Duck hip/torso，无载板/载荷 weld</td><td>身体夹持、搬运、两桌放置与落地释放有原始接触动力学证据</td></tr>
+</tbody></table></div>
+<p>v3 脚本是 <span class="local-record">PhysicalV3Mission<small>本地核验记录：<code>MuJoCo/scripts/stretch_microduck_two_high_tables_physical_v3.py</code></small></span>，沿 TwoTableMission、HighTableScenario、DirectGraspScenario 复用构建和控制。检查闭合接触、滑移、倾角、载荷转移等反馈，使用 stock wheel/lift/arm/wrist/gripper actuators。本次只调用模型构建/编译函数，没有构造 mission 或执行这些技能。</p>
+<p>按<span class="local-record">验收记录配置<small>本地核验记录：<code>MuJoCo/evidence/stretch_microduck_two_high_tables_physical_v3/session.json</code></small></span>编译 Stretch 3 + Duck + 两自由球 + 静态桌，得到 <code>nq/nv/nu=62/58/24</code>。这不是 Stretch 3 单体的维度。编译结果还包含球初始保持 weld 与旧 walking guide；运行时球保持在踢球前关闭，v3 的 walking guide 始终禁用。“无载荷 weld”不等于整个模型 <code>neq=0</code>。</p>
+<p>原始 v3 报告/JSON 记录三次身体夹持、0.50 m 与 0.36 m 台面、两次碰撞踢球、落地后释放，状态为 accepted。Duck locomotion 仍是 <code>MICRODUCK_PLANAR_ASSIST_YELLOW</code>：上限 2 N 水平力，侧向路线偏航力矩上限 0.16 N·m；无竖直力及 roll/pitch 辅助。该演示是脚本物理处理，不是无辅助自主导航、实机安全或已完成 AOR OR 接入。</p>
+<h2 id="仍未知的内容">仍未知的内容</h2>
+<p>真实硬件可承受载荷、摩擦/材料标定、不同 Duck 姿态下的成功率、视觉抓取、跨场景控制稳定性均未由本轮验证。v0/v1/v2 的所有组合场景没有逐个重新加载，其维度不以 v3 数值替代。若后续需要，沿各版本的明确 builder 和配置再做独立 CPU 编译即可；重跑物理技能另行排期。</p></div></main><footer><a class="brand" href="../index.html">AOR<span> / Autonomous OR</span></a><p>先认识身体，再理解协作。</p><div><a href="index.html">全部图解</a><a href="sources.html" lang="zh-CN">图件与来源</a><span>© 2026 Mars Guo</span></div></footer></body></html>

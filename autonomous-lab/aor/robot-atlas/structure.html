@@ -1,0 +1,46 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102a2c"><title>机器人身体结构：link、joint 和 actuator · AOR · Mars Guo</title><meta name="description" content="从身体、关节与控制，读懂机器人和地空协作。七张中文图解，配简明解释与知识卡。"><link rel="stylesheet" href="../style.css"><link rel="stylesheet" href="atlas.css"></head><body>
+<a class="skip" href="#content">跳到正文</a><header class="top"><a class="brand" href="../index.html">Mars Guo<span> / AOR</span></a><nav aria-label="主导航"><a href="../index.html#demos">看演示</a><a href="../index.html#idea">研究方向</a><a href="../index.html#notes">小笔记</a><a href="index.en.html" lang="en">English guide</a></nav></header>
+<main id="content" class="wrap atlas"><a class="back" href="index.html">← 全部图解</a><h1>机器人身体结构：link、joint 和 actuator</h1><div class="atlas-reading knowledge"><p>认识机器人应该先看“身体怎样连起来、哪些地方能动、哪些地方有驱动”，然后才看 <code>nq/nv/nu</code>。本页使用 AOR-012 的既有 CPU <span class="local-record">inventory<small>本地核验记录：<code>docs/robots/runs/20260905-aor012-inventory-01/inventory.json</code></small></span>，没有重新运行仿真。</p>
+<h2 id="用手臂来理解">用手臂来理解</h2>
+<pre tabindex="0"><code>上臂这块身体 ── 肘关节 ── 前臂这块身体
+   link          joint         link
+                  ↑
+             驱动它的 actuator</code></pre>
+<p><code>link</code> 是按刚体处理的身体部分，例如前臂、底盘、脚。<code>joint</code> 规定两部分之间怎样运动，例如只能转动，或只能沿一个方向伸缩。<code>actuator</code> 接受驱动命令并通过关节/传动机构产生作用。身体上有个关节，不代表它一定有独立电机：它可能被动摆动，也可能由另一个关节带着一起动。</p>
+<p>MJCF 常用 <code>body</code> 表示身体，<code>geom</code> 描述挂在身体上的外观或碰撞形状。一个 body 可以有多个 geom，也可能有多个 joint；固定 body 也可以没有 joint。故“有几个 link”“有几个 joint”“有几个 actuator”是三个不同问题，不能互相推算。</p>
+<p>URDF 用 link/joint 建树，其中还有固定 joint；MJCF 不必为固定连接设置 joint。转换与编译还可能合并固定身体。所以本页明确写“编译 body 数”和“MuJoCo joint 元素数”，不伪称它们等于原始 URDF 统计。</p>
+<h2 id="microduck先理解-14-个身体关节">MicroDuck：先理解 14 个身体关节</h2>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">部位</th><th scope="col">转动关节数</th><th scope="col">具体名称</th></tr></thead><tbody>
+<tr><td>左腿</td><td>5</td><td><code>left_hip_yaw</code>、<code>left_hip_roll</code>、<code>left_hip_pitch</code>、<code>left_knee</code>、<code>left_ankle</code></td></tr>
+<tr><td>右腿</td><td>5</td><td>对应的 <code>right_</code> 五个关节</td></tr>
+<tr><td>颈和头</td><td>4</td><td><code>neck_pitch</code>、<code>head_pitch</code>、<code>head_yaw</code>、<code>head_roll</code></td></tr>
+<tr><td>合计</td><td>14</td><td>每个都有同名控制通道</td></tr>
+</tbody></table></div>
+<p>模型还有 <code>trunk_base_freejoint</code>：表示整台机器人相对于世界可以移动和转动。它贡献 6 个速度自由度，却只是一个 joint 元素，而且不是第 15 台电机。因此 Duck 是 <strong>14 个身体转动关节 + 1 个自由基座 joint，<code>njnt=15</code>，<code>nu=14</code></strong>。</p>
+<p>编译后有 15 个机器人 body；计入公共的 <code>world</code> 是 <code>nbody=16</code>。按实际 body 名称，其树是：</p>
+<pre tabindex="0"><code>world
+└─ trunk_base                         躯干/自由基座
+   ├─ yaw2roll → hip_l → upper_leg_left → leg → ankle_left
+   ├─ bearing_roll → hip_l_2 → upper_leg_right → leg_2 → ankle_right
+   └─ neck → neck_pitch → yaw_roll_motion → jaw_soft</code></pre>
+<p>名字按本地文件原样保留，例如右侧分支里实际存在 <code>hip_l_2</code>；不能只凭字符串的字面左右含义重新命名。这里的 <code>neck_pitch</code> 是 body 名，同时也有同名 joint，二者属于不同对象类别。详细控制与能力见 <a href="microduck.html">MicroDuck 卡</a>。</p>
+<h2 id="stretch更多关节不等于更多控制通道">Stretch：更多关节不等于更多控制通道</h2>
+<div class="table-scroll" role="region" aria-label="知识对照表，可横向滚动" tabindex="0"><table><thead><tr><th scope="col">本地模型</th><th scope="col">hinge 转动关节</th><th scope="col">slide 平移关节</th><th scope="col">身体标量关节小计</th><th scope="col">free joint</th><th scope="col"><code>njnt</code></th><th scope="col"><code>nu</code></th><th scope="col">body 数，不含 world</th></tr></thead><tbody>
+<tr><td>Stretch 2</td><td>11</td><td>6</td><td>17</td><td>1</td><td>18</td><td>8</td><td>26</td></tr>
+<tr><td>Stretch 3</td><td>14</td><td>6</td><td>20</td><td>1</td><td>21</td><td>10</td><td>37</td></tr>
+</tbody></table></div>
+<p>Stretch 3 的 20 个身体标量关节可以按功能拆成：两轮 2、升降 1、伸缩臂 4、腕部 3、夹爪滑动/两指开合 3、橡胶指尖柔顺 4、头部 3。合计 20，但仅有 10 个控制通道：两轮、升降、伸缩臂、三轴腕部、夹爪、头部 pan/tilt。</p>
+<p>差异有具体原因：4 节伸缩臂由一个 tendon 输入配合等式联动；夹爪输入联动两指；指尖柔顺关节是被动的；头部导航相机关节没有独立输入。所以不能把这里的 20 个标量关节当成 20 个互不相关的可控电机，也不能直接当成考虑约束后的有效自由度数。</p>
+<p>主要 body 连接如下，省略固定安装体和指尖等支线：</p>
+<pre tabindex="0"><code>base_link
+├─ link_left_wheel / link_right_wheel
+├─ link_lift → link_arm_l4 → link_arm_l3 → link_arm_l2 → link_arm_l1 → link_arm_l0
+│  └─ 从 link_arm_l0 接：link_wrist_yaw → link_DW3_wrist_pitch → link_SG3_gripper_body
+│                                         后续接夹爪滑块、双指及橡胶指尖
+└─ link_head_pan → link_head_tilt → 相机等安装体</code></pre>
+<p>37 个 body 中还包括 <code>base_imu</code>、<code>laser</code>、相机安装体、标记体等。它们的存在不意味着新增 37 个可动部件，更不证明控制器已经使用相应传感器。完整父子关系可查 inventory 的 <code>stretch3_robot.bodies</code>，版本和输入见 <a href="stretch.html">Stretch 卡</a>。</p>
+<h2 id="车辆与场景中的其他物体">车辆与场景中的其他物体</h2>
+<p>自定义平面载台只有一个 <code>vehicle</code> body，它有 X 平移、Y 平移和 yaw 转动三个 joint，以及三个速度 actuator。轮子只是挂在这个 body 上的 geom，没有各自的轮 joint。这能直接说明为何它是简化平面载台，而不是轮地牵引的真实车辆模型。<a href="vehicles.html">车辆卡</a></p>
+<p>本地自由球是一块 body，加一个 free joint，没有 actuator。自由球不是 ball joint：MuJoCo 的 <strong>ball joint</strong> 只允许三个方向的转动；本地球既能平移又能旋转，因此使用 <strong>free joint</strong>。</p>
+<p>v3 组合的 <code>njnt=38</code>，来自 Stretch 3 的 21、Duck 的 15、两个球各 1。<code>nbody=58</code> 还计入公共 world 与保持/引导用的 anchor body；不能简单把它报告成“两台机器人共有 58 个 link”。场景统计必须与各机器人结构分开。</p>
+<p>H1/Carter 的完整结构本轮没有从实际 USD 中提取；只确认 Carter 配置使用两个驱动轮 joint。其余字段继续标未知，补取方法见 <span class="local-record">核验说明<small>本地核验记录：<code>docs/robots/VERIFICATION.md</code></small></span>，不套用另一机器人版本的数量。</p></div></main><footer><a class="brand" href="../index.html">AOR<span> / Autonomous OR</span></a><p>先认识身体，再理解协作。</p><div><a href="index.html">全部图解</a><a href="sources.html" lang="zh-CN">图件与来源</a><span>© 2026 Mars Guo</span></div></footer></body></html>

@@ -20,7 +20,7 @@ document.querySelector('.slide-stage')?.insertAdjacentHTML('beforeend', `
         <p class="lead" data-i18n
           data-en="Cars can drive, robots can manipulate and drones can fly. We study the next question: how should many autonomous agents work together, and how can OR make the whole system better?"
           data-zh="车已经会自己开，机器人已经会操作，无人机已经会飞。我们研究下一步：这些自主智能体怎样一起干活，以及怎样用 OR 把整个系统调度得更好。">Cars can drive, robots can manipulate and drones can fly. We study the next question: how should many autonomous agents work together, and how can OR make the whole system better?</p>
-        <div class="actions"><a class="primary-action" href="autonomous-lab/" data-i18n data-en="See the six-step map →" data-zh="查看六步研究地图 →">See the six-step map →</a><a class="text-action" href="autonomous-lab/#experiments" data-i18n data-en="See current experiments" data-zh="查看当前实验">See current experiments</a></div>
+        <div class="actions"><a class="primary-action" href="autonomous-lab/aor/" data-i18n data-en="Watch AOR demos →" data-zh="看看机器人如何协作 →">Watch AOR demos →</a><a class="text-action" href="autonomous-lab/" data-i18n data-en="See the six-step map" data-zh="查看六步研究地图">See the six-step map</a></div>
       </div>
       <section class="content-window liquid-glass" aria-label="Autonomous systems overview">
         <div class="window-bar"><div><i></i><i></i><i></i></div><span>autonomous-lab / simple-map</span></div>

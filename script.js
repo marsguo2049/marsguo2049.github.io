@@ -44,32 +44,52 @@ function setLanguage(next){
   document.querySelectorAll('.shelf-next').forEach(b=>b.setAttribute('aria-label',language==='zh'?'下一组项目':'Next projects'));
   document.querySelector('.video-close').setAttribute('aria-label',language==='zh'?'关闭视频':'Close video');
   document.querySelector('meta[name=description]').content=language==='zh'?'Mars Guo 的四个探索窗口：科研工具、本地 AI、City2049 与无人实验室。':'Four windows into Mars Guo’s work: research tools, local AI, City2049 and autonomous systems.';
-  remember('portfolio-language',language);refreshMotion();filterProjects();updateRoomView();
+  remember('portfolio-language',language);refreshMotion();filterProjects();updateRoomView();updateArtStatus();
 }
 function loadArt(index){
   return Promise.all([...backdrops[index].querySelectorAll('img')].map(image=>{
     if(image.dataset.src){image.srcset=image.dataset.srcset;image.src=image.dataset.src;delete image.dataset.src;delete image.dataset.srcset}
-    return image.decode().catch(()=>{});
+    return image.decode();
   }));
 }
 async function setScene(index,updateHash=true){
   const next=Number(index);if(!Number.isInteger(next)||next<0||next>=slides.length)return;
   const request=++sceneRequest;
-  // Keep the current scene visible until the requested image can be painted.
-  await loadArt(next);if(request!==sceneRequest)return;
+  // Navigation must respond immediately, independently of image download speed.
   document.querySelectorAll('video').forEach(v=>v.pause());
   if(videoDialog.open)videoDialog.close();
   activeScene=next;app.dataset.active=String(next);
 
   slides.forEach((s,i)=>{const active=i===next;s.classList.toggle('is-active',active);s.inert=!active;s.setAttribute('aria-hidden',String(!active));if(active)s.scrollTop=0});
-  backdrops.forEach((b,i)=>b.classList.toggle('is-active',i===next));
   sceneButtons.forEach(b=>{const active=Number(b.dataset.sceneTarget)===next;b.classList.toggle('is-active',active);if(b.closest('.scene-switcher')){if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')}});
   document.querySelector('#scene-counter').textContent=String(next+1).padStart(2,'0');
   slides[next].querySelectorAll('video').forEach(v=>{if(v.dataset.poster){v.poster=v.dataset.poster;delete v.dataset.poster}});
   if(updateHash)history.replaceState(null,'','#'+ids[next]);
   if(menu.open)menu.close();
-
+  app.classList.remove('art-unavailable');
+  const status=document.querySelector('.art-status');
+  status.hidden=false;status.dataset.state='loading';updateArtStatus();
+  const timeout=setTimeout(()=>{if(request===sceneRequest){status.dataset.state='retry';updateArtStatus()}},8000);
+  try{
+    await loadArt(next);if(request!==sceneRequest)return;
+    backdrops.forEach((b,i)=>b.classList.toggle('is-active',i===next));
+    status.hidden=true;app.classList.remove('art-unavailable');
+  }catch{
+    if(request!==sceneRequest)return;
+    app.classList.add('art-unavailable');status.dataset.state='retry';updateArtStatus();
+  }finally{clearTimeout(timeout)}
 }
+function updateArtStatus(){
+  const status=document.querySelector('.art-status');
+  const retry=status.dataset.state==='retry';
+  status.querySelector('span').textContent=language==='zh'?(retry?'背景暂未加载，内容可正常浏览':'场景加载中…'):(retry?'Background unavailable. Content is ready.':'Loading the room…');
+  status.querySelector('button').hidden=!retry;
+  status.querySelector('button').textContent=language==='zh'?'重试':'Retry';
+}
+document.querySelector('.art-status button').addEventListener('click',()=>{
+  const img=backdrops[activeScene].querySelector('img');if(img.complete&&!img.naturalWidth)img.src=img.getAttribute('src');
+  setScene(activeScene,false);
+});
 function filterProjects(){
   const q=search.value.trim().toLocaleLowerCase();let total=0;
   catalog.querySelectorAll('.catalog-group').forEach(group=>{let count=0;group.querySelectorAll('.catalog-card').forEach(card=>{const words=card.textContent+' '+[...card.querySelectorAll('[data-i18n]')].map(e=>e.dataset.en+' '+e.dataset.zh).join(' ');const match=!q||words.toLocaleLowerCase().includes(q);card.hidden=!match;if(match)count++});group.hidden=count===0;total+=count});

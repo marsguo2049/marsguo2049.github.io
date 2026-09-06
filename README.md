@@ -59,8 +59,14 @@ Four coherent, imagined studios connect the portfolio themes to real work: a blu
 
 - Each room uses one responsive WebP background. Only the opening scene is loaded initially; other rooms load when selected. Source resolution is 1672×941, with 768-pixel mobile variants. No native 4K or background video is claimed.
 - The camera and desk remain stable. Theme changes use a short crossfade, with a disable-transitions option and reduced-motion support. Continuous environment videos remain future work.
-- View the room hides the main content while leaving theme navigation available. Escape restores content. On mobile, copy appears above the room image with natural page scrolling.
+- View the room hides the main content while leaving theme navigation available. Escape restores content. On mobile, the room stays a fullscreen background; text scrolls inside the content area and the theme switcher remains visible.
 - Compact lists show three projects at a time; pagination exposes every selected entry. All Projects retains all 26 catalogue entries and their original public statuses. Py2Cpp4OR appears first in the research list.
 - The Stretch × MicroDuck simulation opens on request in a separate video dialog; its scripted MuJoCo / OR-pending boundary remains explicit.
 
-桌面与机位保持稳定，四主题之间轻柔淡入淡出；“查看场景”可隐藏正文，Esc 返回。手机采用文字在上、场景在下的可滚动布局。每次展示三条项目入口，完整 26 项目录及状态保留。真实环境循环视频尚未制作，当前背景是静态场景。
+桌面与机位保持稳定，四主题之间轻柔淡入淡出；“查看场景”可隐藏正文，Esc 返回。手机采用全屏房间背景，正文区域可独立滚动，主题导航始终可用。每次展示三条项目入口，完整 26 项目录及状态保留。真实环境循环视频尚未制作，当前背景是静态场景。
+
+## Reliable navigation and glass panels / 导航与玻璃面板
+
+Theme selection updates content immediately while the room image loads. A background download failure keeps the content usable and exposes a retry control. Versioned CSS/JS URLs prevent mixed releases from stale asset caches. The full catalogue uses a translucent glass surface showing the current room behind it, with an opaque fallback when backdrop filtering is unavailable.
+
+主题切换立即更新正文和选中状态，背景随后载入；下载失败可重试。CSS/JS 使用内容版本号。全部项目目录采用与主页协调的半透明玻璃材质，并保留文字可读性。

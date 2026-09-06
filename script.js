@@ -21,6 +21,7 @@ function refreshMotion(){
   motion.setAttribute('aria-pressed',String(paused));
   motion.textContent=language==='zh'?(paused?'继续动效':'暂停动效'):(paused?'Resume motion':'Pause motion');
   motion.setAttribute('aria-label',motion.textContent);
+  syncWeather();
 
 }
 function setLanguage(next){
@@ -46,10 +47,10 @@ function setLanguage(next){
   remember('portfolio-language',language);refreshMotion();filterProjects();
 }
 function loadArt(index){
-  const image=backdrops[index].querySelector('img');
-  if(!image)return Promise.resolve();
-  if(image.dataset.src){image.srcset=image.dataset.srcset;image.src=image.dataset.src;delete image.dataset.src;delete image.dataset.srcset}
-  return image.decode().catch(()=>{});
+  return Promise.all([...backdrops[index].querySelectorAll('img'),document.querySelector('.desk-props[data-props="'+index+'"]')].map(image=>{
+    if(image.dataset.src){image.srcset=image.dataset.srcset;image.src=image.dataset.src;delete image.dataset.src;delete image.dataset.srcset}
+    return image.decode().catch(()=>{});
+  }));
 }
 async function setScene(index,updateHash=true){
   const next=Number(index);if(!Number.isInteger(next)||next<0||next>=slides.length)return;
@@ -59,6 +60,7 @@ async function setScene(index,updateHash=true){
   document.querySelectorAll('video').forEach(v=>v.pause());
   if(videoDialog.open)videoDialog.close();
   activeScene=next;app.dataset.active=String(next);
+  syncWeather();
   slides.forEach((s,i)=>{const active=i===next;s.classList.toggle('is-active',active);s.inert=!active;s.setAttribute('aria-hidden',String(!active));if(active)s.scrollTop=0});
   backdrops.forEach((b,i)=>b.classList.toggle('is-active',i===next));
   sceneButtons.forEach(b=>{const active=Number(b.dataset.sceneTarget)===next;b.classList.toggle('is-active',active);if(b.closest('.scene-switcher')){if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')}});
@@ -110,7 +112,7 @@ document.addEventListener('keydown',e=>{
 app.addEventListener('touchstart',e=>{if(catalog.open||menu.open||videoDialog.open||e.target.closest('video,button,a,input'))return;const t=e.changedTouches[0];touchStart={x:t.screenX,y:t.screenY}},{passive:true});
 app.addEventListener('touchend',e=>{if(!touchStart)return;const t=e.changedTouches[0],dx=t.screenX-touchStart.x,dy=t.screenY-touchStart.y;touchStart=null;if(!catalog.open&&!menu.open&&!videoDialog.open&&Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.6)setScene((activeScene+(dx<0?1:3))%4)},{passive:true});
 window.addEventListener('hashchange',()=>{const index=ids.indexOf(location.hash.slice(1));if(index>=0)setScene(index,false)});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)document.querySelectorAll('video').forEach(v=>v.pause());app.classList.toggle('page-hidden',document.hidden)});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)document.querySelectorAll('video').forEach(v=>v.pause());app.classList.toggle('page-hidden',document.hidden);syncWeather()});
 const pointer={x:0,y:0};
 app.addEventListener('pointermove',e=>{
   if(e.pointerType!=='mouse'||paused||reduceMotion.matches)return;
@@ -134,4 +136,64 @@ slides.forEach(slide=>{
   shelf.querySelector('.shelf-next').addEventListener('click',()=>setProjectPage(slide,Number(shelf.dataset.page)+1));
   setProjectPage(slide,0);
 });
+// Window-only atmospheric animation. The frame and desk never move with the view.
+const weatherLayers=[...document.querySelectorAll('.window-weather')].map(canvas=>({canvas,ctx:canvas.getContext('2d'),width:0,height:0}));
+let weatherRequest=0,weatherLast=0,weatherTime=0,weatherFrames=0;
+function resizeWeather(){
+  weatherLayers.forEach(layer=>{const r=layer.canvas.parentElement.getBoundingClientRect(),ratio=Math.min(devicePixelRatio||1,1.25);layer.width=r.width;layer.height=r.height;layer.canvas.width=Math.round(r.width*ratio);layer.canvas.height=Math.round(r.height*ratio);layer.ctx?.setTransform(ratio,0,0,ratio,0,0)});
+  paintWeather();
+}
+function haze(ctx,x,y,rx,ry,alpha){
+  ctx.save();ctx.translate(x,y);ctx.scale(rx,ry);
+  const g=ctx.createRadialGradient(0,0,.1,0,0,1);g.addColorStop(0,`rgba(234,246,255,${alpha})`);g.addColorStop(1,'rgba(234,246,255,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,1,0,Math.PI*2);ctx.fill();ctx.restore();
+}
+function paintWeather(){
+  const layer=weatherLayers[activeScene];if(!layer?.ctx||!layer.width)return;
+  const {ctx,width:w,height:h}=layer,t=weatherTime;
+  ctx.clearRect(0,0,w,h);
+  if(activeScene===1){
+    // Nearby stars drift faster than the planet plate; gentle scintillation adds depth.
+    for(let i=0;i<65;i++){
+      const x=((i*.61803398875+t*(.002+i%3*.001))%1)*w,y=((i*.381966+.137)%1)*h;
+      const a=.18+.4*(.5+.5*Math.sin(t*.7+i));ctx.fillStyle=`rgba(227,218,255,${a})`;ctx.beginPath();ctx.arc(x,y,.55+(i%4)*.28,0,Math.PI*2);ctx.fill();
+    }
+  }else{
+    // Independent mid-distance mist/cloud banks, rather than moving a flat full-page image.
+    for(let i=0;i<5;i++){
+      const x=((i*.29+t*(activeScene===0?.004:.0025))%1.6-.3)*w;
+      const y=h*(activeScene===0?.62+i%2*.08:.19+i%3*.055);
+      haze(ctx,x,y,w*(.22+i%2*.08),h*.065,activeScene===0?.12:.085);
+    }
+    if(activeScene===0||activeScene===2){
+      // Short low-contrast glints over the open water, not over the UI or frame.
+      for(let i=0;i<24;i++){
+        const x=w*(.03+(i*.173+t*.002)% .48),y=h*(.73+(i*.037)% .22);
+        ctx.strokeStyle=`rgba(221,242,255,${.05+.1*(.5+.5*Math.sin(t*1.5+i))})`;ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w*(.008+.008*Math.sin(t*.4+i)),y);ctx.stroke();
+      }
+    }else{
+      // Slow drifting garden leaves; no fictional physical control claim.
+      for(let i=0;i<12;i++){
+        const x=w*(.48+((i*.19+t*.007)% .56)),y=h*((i*.137+t*.015)%1);
+        ctx.save();ctx.translate(x,y);ctx.rotate(t*.6+i);ctx.fillStyle='rgba(188,220,148,.32)';ctx.beginPath();ctx.ellipse(0,0,2.5,1.1,0,0,Math.PI*2);ctx.fill();ctx.restore();
+      }
+    }
+  }
+  layer.canvas.dataset.frame=String(++weatherFrames);
+}
+function weatherRunning(){return !paused&&!reduceMotion.matches&&!document.hidden&&!catalog.open&&!menu.open&&!videoDialog.open}
+function weatherTick(now){
+  weatherRequest=0;if(!weatherRunning())return;
+  if(!weatherLast)weatherLast=now;
+  if(now-weatherLast>=40){weatherTime+=Math.min(now-weatherLast,100)/1000;weatherLast=now;paintWeather()}
+  weatherRequest=requestAnimationFrame(weatherTick);
+}
+function syncWeather(){
+  if(weatherRequest)cancelAnimationFrame(weatherRequest);weatherRequest=0;weatherLast=0;
+  paintWeather();if(weatherRunning())weatherRequest=requestAnimationFrame(weatherTick);
+}
+window.addEventListener('resize',resizeWeather);
+const weatherObserver=new MutationObserver(syncWeather);
+for(const dialog of [catalog,menu,videoDialog])weatherObserver.observe(dialog,{attributes:true,attributeFilter:['open']});
+resizeWeather();
+
 setLanguage(language);setScene(Math.max(0,ids.indexOf(location.hash.slice(1))),false);

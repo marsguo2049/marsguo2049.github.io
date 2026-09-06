@@ -53,11 +53,19 @@ Open `index.html` directly. No build step or external JavaScript dependency is r
 
 ## Window-side studios / 窗边工作室
 
-Four coherent, imagined studios connect the portfolio themes to real work: a blue morning research desk, a rainy local AI workspace, an amber city planning studio and a daylight robotics workbench. The scenes are AI-created concepts, not photographs of the author's actual rooms or experiment evidence.
+Four AI-created studios use the author's photographic references and selected final artwork. They are imagined workspaces, not photographs of actual labs or experiment evidence.
 
-四个主题采用完整的窗边工作室：蓝调晨光中的科研书桌、雨夜本地 AI 工作台、黄昏城市设计室、日光机器人实验桌。场景为 AI 概念创作，不是作者实际工作室照片或实验依据。
+四张最终选定的 AI 场景结合个人照片中的窗边与外景，分别对应以下主题；它们是理想工作室创作，并非实际实验室照片或实验依据。
 
-- Each room uses one responsive WebP background. Only the opening scene is loaded initially; other rooms load when selected. Source resolution is 1672×941, with 768-pixel mobile variants. No native 4K or background video is claimed.
+| Theme / 主题 | Selected scene / 场景 |
+| --- | --- |
+| Research Tools / 科研工具 | Nottingham University clocktower and lake; multimodal logistics networks, multi-agent optimization, OR books and academic papers / 诺丁汉大学钟楼与湖、多式联运网络、多智能体优化、运筹学书籍与论文。 |
+| Local AI Lab / 本地 AI 实验室 | Sunset brick rooftops; Lenovo Legion Y7000X, ComfyUI, code and agent chat, DGX Spark, Mac mini and Reachy Mini / 夕阳砖楼窗景、联想拯救者 Y7000X、本地 AI 工作流与桌面设备。 |
+| City2049 | Future London at night, inspired by Watch Dogs: Legion; Westminster, drones, autonomous vehicles, red buses and a smart-city MacBook Pro / 受《看门狗：军团》启发的 2049 伦敦夜景、无人机、无人车、红色巴士与智慧城市终端。 |
+| Autonomous Systems Lab / 无人实验室 | Hofburg window and garden; MicroDuck, wired simulation workbench, components and Qiyuan Q1 / 霍夫堡窗景、MicroDuck、有线仿真工作台、零件与启元 Q1。 |
+
+- Each room uses responsive WebP backgrounds at 1672×941 and 768×432. Only the opening scene loads initially; other rooms load when selected. Content-versioned image URLs prevent stale artwork, and source selection accounts for fullscreen cover on tall displays.
+- Mobile focal points favor each room's main equipment or landmark. A text-area gradient preserves readability and disappears in View the room mode. No native 4K or background video is claimed.
 - The camera and desk remain stable. Theme changes use a short crossfade, with a disable-transitions option and reduced-motion support. Continuous environment videos remain future work.
 - View the room hides the main content while leaving theme navigation available. Escape restores content. On mobile, the room stays a fullscreen background; text scrolls inside the content area and the theme switcher remains visible.
 - Compact lists show three projects at a time; pagination exposes every selected entry. All Projects retains all 26 catalogue entries and their original public statuses. Py2Cpp4OR appears first in the research list.

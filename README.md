@@ -1,4 +1,4 @@
-# Mars Guo — Research Tools, Local AI, Autonomous Systems & City2049
+# Mars Guo · 2049
 
 `marsguo2049` 工作账号的全屏双语 GitHub Pages 主页。  
 Fullscreen bilingual GitHub Pages portfolio for the `marsguo2049` work account.
@@ -41,7 +41,7 @@ The tool map follows a research workflow:
 - Keyboard arrows or numbers `1`–`4` / 键盘方向键或数字 `1`–`4`。
 - Reduced-motion preferences and a motion pause button are supported / 支持减少动态效果与手动暂停动效。
 - Four shareable scene URLs: `#research`, `#local-ai`, `#city`, `#autonomy` / 四个主题可直接分享定位。
-- All Projects includes search, keyboard focus containment and Escape to close / 全部项目支持搜索、键盘焦点约束和 Esc 关闭。
+- All Projects includes bilingual search, keyboard focus containment and Escape to close / 全部项目支持跨中英文搜索、键盘焦点约束和 Esc 关闭。
 
 ## Account boundary / 账号边界
 
@@ -53,8 +53,16 @@ Open `index.html` directly. No build step or external JavaScript dependency is r
 
 ## Cinematic theme presentation / 主题展示
 
-Four editorial backgrounds introduce research tools, local AI, City2049 and autonomous systems. They are AI-assisted thematic illustrations, not product screenshots or experiment evidence. Only the selected scene loads its responsive WebP; images and type use no external font or JavaScript dependency. The robotics scene offers the existing MuJoCo clip on demand and pauses it when leaving.
+Four scenes introduce a blue-hour research studio, a local AI workbench, a future city and collaborating robots. The first two illustrations were replaced to give each theme a concrete setting. Slow camera movement, gentle local light changes and pointer parallax preserve the scene; motion can be paused and respects reduced-motion preferences.
 
-四主题主视觉为 AI 辅助主题插画，不作为产品截图或实验依据。仅按需加载当前主题的 WebP；正文采用本地字体。无人实验室窗口的既有 MuJoCo 录像由用户点击播放，离开窗口后暂停。极小屏幕可在当前窗口内纵向阅读，页面仍保持全屏切换。
+四个窗口分别呈现蓝色暮光中的科研工作室、本地 AI 工作台、未来城市与机器人协作。前两张重做为具体场景；动效来自轻微镜头移动、局部光线变化与鼠标视差，可暂停并尊重减少动态效果设置。插画不作为产品截图或实验依据。
+
+Each scene shows three quiet project links at a time, with arrows for the rest: 6 research tools, 3 local AI projects, 7 city/interactive projects, and 6 robotics/guide/reference entries. The full catalogue retains all 26 original entries and statuses. Short scene summaries reuse catalogue names, links and statuses; references are labelled as references. The browser title stays **Mars Guo · 2049** in both languages.
+
+每屏先显示三个轻量项目入口，箭头切换其余内容；项目名称、链接和状态取自原目录，仿真参考保留参考标注。完整目录保留原 26 项。标题统一为 **Mars Guo · 2049**。
+
+Only the selected scene loads its responsive WebP. No external fonts or scripts are required. The robotics video opens in a dialog on request, then pauses when closed or when leaving the scene; it does not occupy the homepage background. The existing clip remains a scripted MuJoCo demonstration with OR integration pending. Small viewports can scroll within the active window.
+
+只加载当前场景所需的 WebP，不引入外部字体或脚本。机器人录像点击后在弹窗播放，关闭或切换窗口后暂停；不在主页常驻遮挡背景。既有录像明确为 MuJoCo 脚本演示，OR 待接入。小屏可在当前窗口内纵向阅读。
 
 AOR-021 workspace source: `docs/showcase/portfolio/`; publication serves only this repository. No research run, model, prompt archive or build manifest is exposed.

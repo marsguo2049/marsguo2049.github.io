@@ -51,22 +51,16 @@ The tool map follows a research workflow:
 
 Open `index.html` directly. No build step or external JavaScript dependency is required. GitHub Pages publishes from the repository root on `main`.
 
-## Animated window scenes / 动态窗景
+## Window-side studios / 窗边工作室
 
-Four themes share a panoramic window and a desk. The view and desktop objects change together: a blue mountain-lake research setting with books, a space window with a local AI terminal, a future city with an architectural model, and a robotics garden with a small experimental robot. The artwork uses animated-feature styling and is clearly illustrative.
+Four coherent, imagined studios connect the portfolio themes to real work: a blue morning research desk, a rainy local AI workspace, an amber city planning studio and a daylight robotics workbench. The scenes are AI-created concepts, not photographs of the author's actual rooms or experiment evidence.
 
-四个主题共享窗框与书桌：科研窗口是蓝色山湖与书本；本地 AI 是太空舷窗与计算终端；City2049 是未来城市与建筑模型；无人实验室是机器人花园与小型实验模型。场景采用动画电影式视觉，均为主题插画。
+四个主题采用完整的窗边工作室：蓝调晨光中的科研书桌、雨夜本地 AI 工作台、黄昏城市设计室、日光机器人实验桌。场景为 AI 概念创作，不是作者实际工作室照片或实验依据。
 
-The window view, atmospheric animation, frame and transparent desk foreground are separate layers. The exterior drifts gently while mist, water glints, stars or leaves animate independently. The frame and desk stay fixed after the theme transition. These are real-time web animations, not recordings of physical experiments. Motion pauses on request, in the background or with reduced-motion preferences; modal dialogs pause the atmospheric layer.
+- Each room uses one responsive WebP background. Only the opening scene is loaded initially; other rooms load when selected. Source resolution is 1672×941, with 768-pixel mobile variants. No native 4K or background video is claimed.
+- The camera and desk remain stable. Theme changes use a short crossfade, with a disable-transitions option and reduced-motion support. Continuous environment videos remain future work.
+- View the room hides the main content while leaving theme navigation available. Escape restores content. On mobile, copy appears above the room image with natural page scrolling.
+- Compact lists show three projects at a time; pagination exposes every selected entry. All Projects retains all 26 catalogue entries and their original public statuses. Py2Cpp4OR appears first in the research list.
+- The Stretch × MicroDuck simulation opens on request in a separate video dialog; its scripted MuJoCo / OR-pending boundary remains explicit.
 
-窗外、云雾/星光等动画、窗框与透明桌面前景分层。远景缓慢移动，雾气、水面闪光、星点或叶片独立变化；主题切换完成后窗框和桌面保持固定。动效为网页实时呈现，不是物理实验录像。支持手动暂停、后台暂停和减少动态效果；弹窗打开时暂停窗外气氛动画。
-
-Each scene keeps three quiet project links at a time, with arrows for the rest: 6 research tools, 3 local AI projects, 7 city/interactive projects, and 6 robotics/guide/reference entries. The full catalogue retains all 26 original entries and statuses. Names, URLs and statuses come from the catalogue. The browser title remains **Mars Guo · 2049** in both languages.
-
-每屏仍先显示三个轻量项目入口，箭头切换其余内容。名称、链接和状态取自原目录；完整目录保留原 26 项。标题统一为 **Mars Guo · 2049**。
-
-Only the selected window scene and desk image are requested initially; the remaining scenes load when selected. The site uses responsive WebP images, preserves foreground transparency and requires no external font, JavaScript or video dependency for its backgrounds. The existing MuJoCo video remains click-to-play in a separate dialog, explicitly labelled as a scripted physical demonstration with OR integration pending. Closing it or changing scenes pauses playback.
-
-首次只请求当前窗景与桌面图，其余主题按需加载。WebP 保留前景透明度，背景不依赖外部字体、脚本或视频下载。既有 MuJoCo 演示仍点击后弹窗播放，明确为脚本物理演示、OR 待接入；关闭或切换主题会暂停。
-
-AOR-021 workspace source: `docs/showcase/portfolio/`; the current layered assets originate in `window-art/`. Publication serves only this repository. No research run, model, raw image, prompt archive or local preview recording is published.
+桌面与机位保持稳定，四主题之间轻柔淡入淡出；“查看场景”可隐藏正文，Esc 返回。手机采用文字在上、场景在下的可滚动布局。每次展示三条项目入口，完整 26 项目录及状态保留。真实环境循环视频尚未制作，当前背景是静态场景。

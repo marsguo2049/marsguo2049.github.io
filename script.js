@@ -39,11 +39,12 @@ function setLanguage(next){
   document.querySelector('.menu-close').setAttribute('aria-label',language==='zh'?'关闭菜单':'Close menu');
   document.querySelector('.skip-link').textContent=language==='zh'?'跳到正文':'Skip to content';
   document.querySelector('.video-start').setAttribute('aria-label',language==='zh'?'播放仿真视频':'Play simulation video');
-  document.title='Mars Guo · 2049';
+  document.title='Mars Guo';
+  document.querySelector('.about-mobile-image').alt=language==='zh'?'Mars Guo 在白崖海岸前的 AI 肖像':'AI portrait of Mars Guo by the white chalk cliffs';
   document.querySelectorAll('.shelf-prev').forEach(b=>b.setAttribute('aria-label',language==='zh'?'上一组项目':'Previous projects'));
   document.querySelectorAll('.shelf-next').forEach(b=>b.setAttribute('aria-label',language==='zh'?'下一组项目':'Next projects'));
   document.querySelector('.video-close').setAttribute('aria-label',language==='zh'?'关闭视频':'Close video');
-  document.querySelector('meta[name=description]').content=language==='zh'?'Mars Guo 的四个探索窗口：科研工具、本地 AI、City2049 与无人实验室。':'Four windows into Mars Guo’s work: research tools, local AI, City2049 and autonomous systems.';
+  document.querySelector('meta[name=description]').content=language==='zh'?'Mars Guo 的工作主页：关于我、科研工具、本地 AI、City2049 与无人实验室。':'Mars Guo’s work portfolio: about me, research tools, local AI, City2049 and autonomous systems.';
   remember('portfolio-language',language);refreshMotion();filterProjects();updateRoomView();updateArtStatus();
 }
 function loadArt(index){
@@ -63,6 +64,7 @@ async function setScene(index,updateHash=true){
   slides.forEach((s,i)=>{const active=i===next;s.classList.toggle('is-active',active);s.inert=!active;s.setAttribute('aria-hidden',String(!active));if(active)s.scrollTop=0});
   sceneButtons.forEach(b=>{const active=Number(b.dataset.sceneTarget)===next;b.classList.toggle('is-active',active);if(b.closest('.scene-switcher')){if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')}});
   document.querySelector('#scene-counter').textContent=String(next+1).padStart(2,'0');
+  if(next===0){app.classList.remove('scene-only');updateRoomView()}
   slides[next].querySelectorAll('video').forEach(v=>{if(v.dataset.poster){v.poster=v.dataset.poster;delete v.dataset.poster}});
   if(updateHash)history.replaceState(null,'','#'+ids[next]);
   if(menu.open)menu.close();
@@ -126,12 +128,12 @@ videoDialog.addEventListener('close',()=>videoDialog.querySelector('video').paus
 reduceMotion.addEventListener('change',refreshMotion);
 document.addEventListener('keydown',e=>{
   if(catalog.open||menu.open||videoDialog.open||e.altKey||e.ctrlKey||e.metaKey||e.target.closest('input,textarea,select,video,[contenteditable]'))return;
-  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();setScene((activeScene+(e.key==='ArrowRight'?1:3))%4)}
-  else if(/^[1-4]$/.test(e.key))setScene(Number(e.key)-1);
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();setScene((activeScene+(e.key==='ArrowRight'?1:slides.length-1))%slides.length)}
+  else if(/^[1-5]$/.test(e.key))setScene(Number(e.key)-1);
 });
 app.addEventListener('touchstart',e=>{if(catalog.open||menu.open||videoDialog.open||e.target.closest('video,button,a,input'))return;const t=e.changedTouches[0];touchStart={x:t.screenX,y:t.screenY}},{passive:true});
-app.addEventListener('touchend',e=>{if(!touchStart)return;const t=e.changedTouches[0],dx=t.screenX-touchStart.x,dy=t.screenY-touchStart.y;touchStart=null;if(!catalog.open&&!menu.open&&!videoDialog.open&&Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.6)setScene((activeScene+(dx<0?1:3))%4)},{passive:true});
-window.addEventListener('hashchange',()=>{const index=ids.indexOf(location.hash.slice(1));if(index>=0)setScene(index,false)});
+app.addEventListener('touchend',e=>{if(!touchStart)return;const t=e.changedTouches[0],dx=t.screenX-touchStart.x,dy=t.screenY-touchStart.y;touchStart=null;if(!catalog.open&&!menu.open&&!videoDialog.open&&Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.6)setScene((activeScene+(dx<0?1:slides.length-1))%slides.length)},{passive:true});
+window.addEventListener('hashchange',()=>{const index=ids.indexOf(location.hash.slice(1));if(index>=0)setScene(index,false);else if(!location.hash)setScene(0,false)});
 document.addEventListener('visibilitychange',()=>{if(document.hidden)document.querySelectorAll('video').forEach(v=>v.pause());app.classList.toggle('page-hidden',document.hidden)});
 function setProjectPage(slide,page){
   const shelf=slide.querySelector('.project-shelf'),items=[...shelf.querySelectorAll('.project-tile')];
@@ -145,6 +147,7 @@ function setProjectPage(slide,page){
 }
 slides.forEach(slide=>{
   const shelf=slide.querySelector('.project-shelf');
+  if(!shelf)return;
   shelf.querySelector('.shelf-prev').addEventListener('click',()=>setProjectPage(slide,Number(shelf.dataset.page)-1));
   shelf.querySelector('.shelf-next').addEventListener('click',()=>setProjectPage(slide,Number(shelf.dataset.page)+1));
   setProjectPage(slide,0);
@@ -153,7 +156,7 @@ const viewRoom=document.querySelector('.scene-view');
 function updateRoomView(){
   const clean=app.classList.contains('scene-only');
   viewRoom.setAttribute('aria-pressed',String(clean));
-  viewRoom.textContent=language==='zh'?(clean?'返回内容':'查看场景'):(clean?'Show content':'View the room');
+  viewRoom.textContent=language==='zh'?(clean?'返回内容':'查看场景'):(clean?'Show content':'View scene');
   document.querySelector('.slide-stage').inert=clean;
 }
 viewRoom.addEventListener('click',()=>{app.classList.toggle('scene-only');updateRoomView()});

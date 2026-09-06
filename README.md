@@ -1,4 +1,4 @@
-# Mars Guo · 2049
+# Mars Guo
 
 `marsguo2049` 工作账号的全屏双语 GitHub Pages 主页。  
 Fullscreen bilingual GitHub Pages portfolio for the `marsguo2049` work account.
@@ -33,14 +33,20 @@ The tool map follows a research workflow:
 - **[ComfyUI Py Workflow](https://github.com/marsguo2049/comfyui-py-workflow)** — 用 Python 调用并串联本地 ComfyUI 图像与视频工作流。
 - **[Multi-Model Workflow Optimization](https://github.com/marsguo2049/multi-model-workflow-optimization)** — 研究质量、成本与资源权衡下的模型、参数与工作流选择。
 
+## About me / 关于我
+
+The homepage title is **Mars Guo**. About me is the default first scene, followed by Research Tools, Local AI Lab, City2049 and Autonomous Systems Lab. It uses the approved AI white-cliffs portrait, a bilingual work-account introduction, research focus and links to the four themes. City2049 remains the future-city theme name.
+
+主页标题为 **Mars Guo**。「关于我」是默认第一屏，之后依次为科研工具、本地 AI、City2049、无人实验室。首页采用已确认的白崖 AI 肖像，介绍工作账号与研究方向，并提供四个主题入口。手机上，肖像位于简介上方；五个窗口共用导航。原有项目、状态、场景直达链接及仿真视频保留。
+
 ## Language and interaction / 语言与交互
 
 - Complete English/Chinese switch with saved preference / 完整中英文切换并记忆选择。
 - Bottom switcher changes themes; All Projects opens the full catalogue / 底部切换主题，顶部项目目录展示全部项目。
 - Mobile menu and horizontal swipe / 移动端菜单与左右滑动。
-- Keyboard arrows or numbers `1`–`4` / 键盘方向键或数字 `1`–`4`。
+- Keyboard arrows or numbers `1`–`5` / 键盘方向键或数字 `1`–`5`。
 - Reduced-motion preferences and a motion pause button are supported / 支持减少动态效果与手动暂停动效。
-- Four shareable scene URLs: `#research`, `#local-ai`, `#city`, `#autonomy` / 四个主题可直接分享定位。
+- Five shareable scene URLs: `#about`, `#research`, `#local-ai`, `#city`, `#autonomy` / 五个窗口可直接分享定位。
 - All Projects includes bilingual search, keyboard focus containment and Escape to close / 全部项目支持跨中英文搜索、键盘焦点约束和 Esc 关闭。
 
 ## Account boundary / 账号边界
@@ -64,7 +70,7 @@ Four AI-created studios use the author's photographic references and selected fi
 | City2049 | Future London at night, inspired by Watch Dogs: Legion; Westminster, drones, autonomous vehicles, red buses and a smart-city MacBook Pro / 受《看门狗：军团》启发的 2049 伦敦夜景、无人机、无人车、红色巴士与智慧城市终端。 |
 | Autonomous Systems Lab / 无人实验室 | Hofburg window and garden; MicroDuck, wired simulation workbench, components and Qiyuan Q1 / 霍夫堡窗景、MicroDuck、有线仿真工作台、零件与启元 Q1。 |
 
-- Each room uses responsive WebP backgrounds at 1672×941 and 768×432. Only the opening scene loads initially; other rooms load when selected. Content-versioned image URLs prevent stale artwork, and source selection accounts for fullscreen cover on tall displays.
+- Each room uses responsive WebP backgrounds at 1672×941 and 768×432. The opening portrait loads initially; studio backgrounds load when selected. Content-versioned image URLs prevent stale artwork, and source selection accounts for fullscreen cover on tall displays.
 - Mobile focal points favor each room's main equipment or landmark. A text-area gradient preserves readability and disappears in View the room mode. No native 4K or background video is claimed.
 - The camera and desk remain stable. Theme changes use a short crossfade, with a disable-transitions option and reduced-motion support. Continuous environment videos remain future work.
 - View the room hides the main content while leaving theme navigation available. Escape restores content. On mobile, the room stays a fullscreen background; text scrolls inside the content area and the theme switcher remains visible.

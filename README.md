@@ -38,8 +38,10 @@ The tool map follows a research workflow:
 - Complete English/Chinese switch with saved preference / 完整中英文切换并记忆选择。
 - Bottom switcher changes themes; All Projects opens the full catalogue / 底部切换主题，顶部项目目录展示全部项目。
 - Mobile menu and horizontal swipe / 移动端菜单与左右滑动。
-- Keyboard arrows or numbers `1`–`4` / 键盘方向键或数字 `1`–`3`。
-- Reduced-motion preferences are respected / 支持减少动态效果的系统设置。
+- Keyboard arrows or numbers `1`–`4` / 键盘方向键或数字 `1`–`4`。
+- Reduced-motion preferences and a motion pause button are supported / 支持减少动态效果与手动暂停动效。
+- Four shareable scene URLs: `#research`, `#local-ai`, `#city`, `#autonomy` / 四个主题可直接分享定位。
+- All Projects includes search, keyboard focus containment and Escape to close / 全部项目支持搜索、键盘焦点约束和 Esc 关闭。
 
 ## Account boundary / 账号边界
 
@@ -48,3 +50,11 @@ The tool map follows a research workflow:
 ## Local preview and publishing / 本地预览与发布
 
 Open `index.html` directly. No build step or external JavaScript dependency is required. GitHub Pages publishes from the repository root on `main`.
+
+## Cinematic theme presentation / 主题展示
+
+Four editorial backgrounds introduce research tools, local AI, City2049 and autonomous systems. They are AI-assisted thematic illustrations, not product screenshots or experiment evidence. Only the selected scene loads its responsive WebP; images and type use no external font or JavaScript dependency. The robotics scene offers the existing MuJoCo clip on demand and pauses it when leaving.
+
+四主题主视觉为 AI 辅助主题插画，不作为产品截图或实验依据。仅按需加载当前主题的 WebP；正文采用本地字体。无人实验室窗口的既有 MuJoCo 录像由用户点击播放，离开窗口后暂停。极小屏幕可在当前窗口内纵向阅读，页面仍保持全屏切换。
+
+AOR-021 workspace source: `docs/showcase/portfolio/`; publication serves only this repository. No research run, model, prompt archive or build manifest is exposed.
